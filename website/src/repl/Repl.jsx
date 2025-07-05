@@ -10,11 +10,16 @@ import ReplEditor from './components/ReplEditor';
 import EmbeddedReplEditor from './components/EmbeddedReplEditor';
 import { useReplContext } from './useReplContext';
 import { useSettings } from '@src/settings.mjs';
+import { GlobalContextProvider } from './useGlobalContext';
 
 export function Repl({ embedded = false }) {
   const isEmbedded = embedded || isIframe();
   const Editor = isUdels() ? UdelsEditor : isEmbedded ? EmbeddedReplEditor : ReplEditor;
   const context = useReplContext();
   const { fontFamily } = useSettings();
-  return <Editor context={context} style={{ fontFamily }} />;
+  return (
+    <GlobalContextProvider>
+      <Editor context={context} style={{ fontFamily }} />
+    </GlobalContextProvider>
+  );
 }
