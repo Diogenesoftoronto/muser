@@ -10,6 +10,7 @@ import { WelcomeTab } from './WelcomeTab';
 import { PatternsTab } from './PatternsTab';
 import { ChevronLeftIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { WelcomeMuser } from './WelcomeMuser';
+import { TopChartsTab } from './TopChartsTab';
 
 const TAURI = typeof window !== 'undefined' && window.__TAURI__;
 
@@ -83,6 +84,7 @@ const tabNames = {
   reference: 'reference',
   console: 'console',
   settings: 'settings',
+  topCharts: 'top charts',
 };
 if (TAURI) {
   tabNames.files = 'files';
@@ -131,6 +133,8 @@ function PanelContent({ context, tab }) {
       return <SettingsTab started={context.started} />;
     case tabNames.files:
       return <FilesTab />;
+    case tabNames.topCharts:
+      return <TopChartsTab context={context} />;
     default:
       // return <WelcomeTab context={context} />;
       return <WelcomeMuser context={context} />;
