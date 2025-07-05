@@ -1,14 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { useGlobalContext } from '../../useGlobalContext';
 
 export function ChatWindow() {
-    const [messages, setMessages] = useState([
-        {
-            id: 0,
-            text: "welcome to muser, a new vibe coding music platform to generate music. Chat to get started.",
-            sender: 'bot',
-            timestamp: new Date()
-        }
-    ]);
+    const { messages, sendMessageToAI } = useGlobalContext();
     const [inputValue, setInputValue] = useState('');
     const messagesEndRef = useRef(null);
 
@@ -24,24 +18,8 @@ export function ChatWindow() {
         e.preventDefault();
         if (!inputValue.trim()) return;
 
-        // Add user message
-        const userMessage = {
-            id: Date.now(),
-            text: inputValue,
-            sender: 'user',
-            timestamp: new Date()
-        };
-
-        // Add placeholder response
-        // FIXME: jae replace this with real LLM call
-        const botMessage = {
-            id: Date.now() + 1,
-            text: "nah im good",
-            sender: 'bot',
-            timestamp: new Date()
-        };
-
-        setMessages(prev => [...prev, userMessage, botMessage]);
+        // Send message to AI via global context
+        sendMessageToAI(inputValue);
         setInputValue('');
     };
 
@@ -61,6 +39,13 @@ export function ChatWindow() {
                                 }`}
                         >
                             <p className="text-sm">{message.text}</p>
+                            {message.isLoading && (
+                                <div className="mt-2 flex space-x-1">
+                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}

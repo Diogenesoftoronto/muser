@@ -4,6 +4,8 @@ import { Code } from '@src/repl/components/Code';
 import UserFacingErrorMessage from '@src/repl/components/UserFacingErrorMessage';
 import { Header } from './Header';
 import { useSettings } from '@src/settings.mjs';
+import { useGlobalContext } from '../useGlobalContext';
+import { useEffect } from 'react';
 
 // type Props = {
 //  context: replcontext,
@@ -12,8 +14,20 @@ import { useSettings } from '@src/settings.mjs';
 export default function ReplEditor(Props) {
   const { context, ...editorProps } = Props;
   const { containerRef, editorRef, error, init, pending } = context;
+  const { setReplEditorContext } = useGlobalContext();
+
+  console.log("hello ", 'ReplEditor', editorRef.current);
+
+  // Access the code from editorRef
+  const code = editorRef.current?.code;
+  console.log("Code content:", code);
   const settings = useSettings();
   const { panelPosition, isZen } = settings;
+
+  // Register this REPL context with the global context
+  useEffect(() => {
+    setReplEditorContext(context);
+  }, [context, setReplEditorContext]);
 
   return (
     <div className="h-full flex flex-col relative" {...editorProps}>

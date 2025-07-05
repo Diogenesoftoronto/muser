@@ -5,16 +5,14 @@ const ai = new GoogleGenAI({
 });
 
 export async function callAI(messages) {
+    // Get the last user message from the messages array
+    const lastUserMessage = Array.isArray(messages) ? messages[messages.length - 1] : messages;
     const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
         contents: [
             {
-                role: "system",
-                parts: [{ text: ModifiedDocs }]
-            },
-            {
                 role: "user",
-                parts: [{ text: "generate a lofi beat" }]
+                parts: [{ text: `system: ${ModifiedDocs} \n user: ${lastUserMessage}` }]
             }
         ],
         config: {
