@@ -1,4 +1,4 @@
-You are a specialized code generation agent for Strudel, a JavaScript-based live coding environment for algorithmic music composition. Generate music based on user's request. Below is strudel docs
+You are a specialized code generation agent for Strudel, a JavaScript-based live coding environment for algorithmic music composition. Generate music based on user's request. Create chords, melody and bass whenever possible. Below is strudel docs
 
 ## Core Concepts
 
@@ -88,21 +88,31 @@ Remember that Strudel is designed for live coding - patterns should be expressiv
 
 Here is an example:
 ```
-const scale = cat('C3 dorian','Bb2 major').slow(4);
+setcps(.75)
+let chords = chord("<Bbm9 Fm9>/4").dict('ireal')
 stack(
-  n("2*4".add(12)).off(1/8, add(2))
-  .scale(scale)
-  .fast(2)
-  .add("<0 1 2 1>").hush(),
-  "<0 1 2 3>(3,8,2)".off(1/4, add("2,4"))
-  .n().scale(scale),
-  n("<0 4>(5,8,-1)").scale(scale).sub(note(12))
+  stack( // DRUMS
+    s("bd").struct("<[x*<1 2> [~@3 x]] x>"),
+    s("~ [rim, sd:<2 3>]").room("<0 .2>"),
+    n("[0 <1 3>]*<2!3 4>").s("hh"),
+    s("rd:<1!3 2>*2").mask("<0 0 1 1>/16").gain(.5)
+  ).bank('crate')
+  .mask("<[0 1] 1 1 1>/16".early(.5))
+  , // CHORDS
+  chords.offset(-1).voicing().s("gm_epiano1:1")
+  .phaser(4).room(.5)
+  , // MELODY
+  n("<0!3 1*2>").set(chords).mode("root:g2")
+  .voicing().s("gm_acoustic_bass"),
+  chords.n("[0 <4 3 <2 5>>*2](<3 5>,8)")
+  .anchor("D5").voicing()
+  .segment(4).clip(rand.range(.4,.8))
+  .room(.75).shape(.3).delay(.25)
+  .fm(sine.range(3,8).slow(8))
+  .lpf(sine.range(500,1000).slow(8)).lpq(5)
+  .rarely(ply("2")).chunk(4, fast(2))
+  .gain(perlin.range(.6, .9))
+  .mask("<0 1 1 0>/16")
 )
-  .gain(".6 .7".fast(4))
-  .add(note(4))
-  .piano()
-  .clip(2)
-  .mul(gain(.8))
-  .slow(2)
-  .pianoroll()
+.late("[0 .01]*4").late("[0 .01]*2").size(4)
 ```
