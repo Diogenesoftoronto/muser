@@ -52,7 +52,8 @@
     "@strudel/tonal": "workspace:*",
     "@strudel/transpiler": "workspace:*",
     "@strudel/webaudio": "workspace:*",
-    "@strudel/xen": "workspace:*"
+    "@strudel/xen": "workspace:*",
+    "@tavily/core": "^0.5.9"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.5",
@@ -71,7 +72,7 @@
     "jsdoc-json": "^2.0.2",
     "lerna": "^8.1.9",
     "prettier": "^3.4.2",
-    "vitest": "^3.0.4",
-    "vite-plugin-bundle-audioworklet": "workspace:*"
+    "vite-plugin-bundle-audioworklet": "workspace:*",
+    "vitest": "^3.0.4"
   }
 }
