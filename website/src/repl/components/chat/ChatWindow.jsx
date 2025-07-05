@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useGlobalContext } from '../../useGlobalContext';
-
+import microphone from "../../../../public/icons/microphone.svg"
 export function ChatWindow() {
     const { messages, sendMessageToAI } = useGlobalContext();
     const [inputValue, setInputValue] = useState('');
@@ -104,9 +104,7 @@ export function ChatWindow() {
                         aria-label="Start voice input"
                     >
                         {/* Simple mic SVG icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 14a3 3 0 003-3V5a3 3 0 10-6 0v6a3 3 0 003 3zm5-3a1 1 0 10-2 0 5 5 0 01-10 0 1 1 0 10-2 0 7 7 0 0014 0z" />
-                        </svg>
+                                    <img src={microphone} alt="microphone" />
                     </button>
                     <button
                         type="submit"
