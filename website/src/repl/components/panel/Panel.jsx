@@ -9,6 +9,7 @@ import { useLogger } from '../useLogger';
 import { WelcomeTab } from './WelcomeTab';
 import { PatternsTab } from './PatternsTab';
 import { ChevronLeftIcon, XMarkIcon } from '@heroicons/react/16/solid';
+import { WelcomeMuser } from './WelcomeMuser';
 
 const TAURI = typeof window !== 'undefined' && window.__TAURI__;
 
@@ -131,7 +132,8 @@ function PanelContent({ context, tab }) {
     case tabNames.files:
       return <FilesTab />;
     default:
-      return <WelcomeTab context={context} />;
+      // return <WelcomeTab context={context} />;
+      return <WelcomeMuser context={context} />;
   }
 }
 

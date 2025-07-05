@@ -47,7 +47,6 @@ export function Header({ context, embedded = false }) {
               }
             }}
           >
-            <span className="block text-foreground rotate-90">꩜</span>
           </div>
           {!isZen && (
             <div className="space-x-2">
@@ -101,7 +100,7 @@ export function Header({ context, embedded = false }) {
               <span> shuffle</span>
             </button>
           ) */}
-          {!isEmbedded && (
+          {/* {!isEmbedded && (
             <button
               title="share"
               className={cx(
@@ -112,8 +111,8 @@ export function Header({ context, embedded = false }) {
             >
               <span>share</span>
             </button>
-          )}
-          {!isEmbedded && (
+          )} */}
+          {/* {!isEmbedded && (
             <a
               title="learn"
               href={`${baseNoTrailing}/workshop/getting-started/`}
@@ -121,7 +120,7 @@ export function Header({ context, embedded = false }) {
             >
               <span>learn</span>
             </a>
-          )}
+          )} */}
           {/* {isEmbedded && (
             <button className={cx('hover:opacity-50 px-2')}>
               <a href={window.location.href} target="_blank" rel="noopener noreferrer" title="Open in REPL">
