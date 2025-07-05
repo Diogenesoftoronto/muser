@@ -11,6 +11,8 @@ export function ChatWindow() {
     ]);
     const [inputValue, setInputValue] = useState('');
     const messagesEndRef = useRef(null);
+    const [isListening, setIsListening] = useState(false);
+    const recognitionRef = useRef(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -45,6 +47,39 @@ export function ChatWindow() {
         setInputValue('');
     };
 
+    const handleMicClick = () => {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('Speech recognition not supported in this browser.');
+            return;
+        }
+        if (!recognitionRef.current) {
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.lang = 'en-US';
+            recognitionRef.current.interimResults = false;
+            recognitionRef.current.maxAlternatives = 1;
+            recognitionRef.current.continuous = true;
+            recognitionRef.current.onresult = (event) => {
+                const transcript = event.results[event.resultIndex][0].transcript;
+                setInputValue(prev => prev + transcript);
+            };
+            recognitionRef.current.onerror = (event) => {
+                alert('Speech recognition error: ' + event.error);
+                setIsListening(false);
+            };
+            recognitionRef.current.onend = () => {
+                setIsListening(false);
+            };
+        }
+        if (isListening) {
+            recognitionRef.current.stop();
+            setIsListening(false);
+        } else {
+            setIsListening(true);
+            recognitionRef.current.start();
+        }
+    };
+
     return (
         <div className="mt-6 flex flex-col h-full">
             {/* Chat Messages */}
@@ -77,6 +112,17 @@ export function ChatWindow() {
                         placeholder="Generate lofi beats mixed with a bit of jazz..."
                         className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    <button
+                        type="button"
+                        onClick={handleMicClick}
+                        className={`px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${isListening ? 'bg-red-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
+                        aria-label="Start voice input"
+                    >
+                        {/* Simple mic SVG icon */}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 14a3 3 0 003-3V5a3 3 0 10-6 0v6a3 3 0 003 3zm5-3a1 1 0 10-2 0 5 5 0 01-10 0 1 1 0 10-2 0 7 7 0 0014 0z" />
+                        </svg>
+                    </button>
                     <button
                         type="submit"
                         className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
