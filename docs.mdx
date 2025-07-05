@@ -1,0 +1,3264 @@
+---
+title: Accumulation Modifiers
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Accumulation Modifiers
+
+## superimpose
+
+<JsDoc client:idle name="Pattern.superimpose" h={0} />
+
+## layer
+
+<JsDoc client:idle name="Pattern.layer" h={0} />
+
+## off
+
+<JsDoc client:idle name="Pattern.off" h={0} />
+
+## echo
+
+<JsDoc client:idle name="Pattern.echo" h={0} />
+
+## echoWith
+
+<JsDoc client:idle name="echoWith" h={0} />
+
+## stut
+
+<JsDoc client:idle name="stut" h={0} />
+
+There are also [Tonal Functions](/learn/tonal).
+---
+title: Coding syntax
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Coding Syntax
+
+Let's take a step back and understand how the syntax in Strudel works.
+
+Take a look at this simple example:
+
+<MiniRepl client:idle tune={`note("c a f e").s("piano")`} />
+
+- We have a word `note` which is followed by some brackets `()` with some words/letters/numbers inside, surrounded by quotes `"c a f e"`
+- Then we have a dot `.` followed by another similar piece of code `s("piano")`.
+- We can also see these texts are _highlighted_ using colours: word `note` is purple, the brackets `()` are grey, and the content inside the `""` are green. (The colors could be different if you've changed the default theme)
+
+What happens if we try to 'break' this pattern in different ways?
+
+<MiniRepl client:idle tune={`note(c a f e).s(piano)`} />
+
+<MiniRepl client:idle tune={`note("c a f e")s("piano")`} />
+
+<MiniRepl client:idle tune={`note["c a f e"].s{"piano"}`} />
+
+Ok, none of these seem to work...
+
+<MiniRepl client:idle tune={`s("piano").note("c a f e")`} />
+
+This one does work, but now we only hear the first note...
+
+So what is going on here?
+
+# Functions, arguments and chaining
+
+So far, we've seen the following syntax:
+
+```
+xxx("foo").yyy("bar")
+```
+
+Generally, `xxx` and `yyy` are called [_functions_](<https://en.wikipedia.org/wiki/Function_(computer_programming)>), while `foo` and `bar` are called function [_arguments_ or _parameters_](<https://en.wikipedia.org/wiki/Parameter_(computer_programming)>).
+So far, we've used the functions to declare which aspect of the sound we want to control, and their arguments for the actual data.
+The `yyy` function is called a [_chained_ function](https://en.wikipedia.org/wiki/Method_chaining), because it is appended with a dot (`.`).
+
+Generally, the idea with chaining is that code such as `a("this").b("that").c("other")` allows `a`, `b` and `c` functions to happen in a specified order, without needing to write them as three separate lines of code.
+You can think of this as being similar to chaining audio effects together using guitar pedals or digital audio effects.
+
+Strudel makes heavy use of chained functions. Here is a more sophisticated example:
+
+<MiniRepl
+  client:idle
+  tune={`note("a3 c#4 e4 a4")
+.s("sawtooth")
+.cutoff(500)
+//.delay(0.5)
+.room(0.5)`}
+/>
+
+# Comments
+
+The `//` in the example above is a line comment, resulting in the `delay` function being ignored.
+It is a handy way to quickly turn code on and off.
+Try uncommenting this line by deleting `//` and refreshing the pattern.
+You can also use the keyboard shortcut `cmd-/` to toggle comments on and off.
+
+You might noticed that some comments in the REPL samples include some words starting with a "@", like `@by` or `@license`.
+Those are just a convention to define some information about the music. We will talk about it in the [Music metadata](/learn/metadata) section.
+
+# Strings
+
+Ok, so what about the content inside the quotes (e.g. `"c a f e"`)?
+In JavaScript, as in most programming languages, this content is referred to as being a [_string_](<https://en.wikipedia.org/wiki/String_(computer_science)>).
+A string is simply a sequence of individual characters.
+In TidalCycles, double quoted strings are used to write _patterns_ using the mini-notation, and you may hear the phrase _pattern string_ from time to time.
+If you want to create a regular string and not a pattern, you can use single quotes, e.g. `'C minor'` will not be parsed as Mini Notation.
+
+The good news is, that this covers most of the JavaScript syntax needed for Strudel!
+
+<br />
+---
+title: Colors
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+import Colors from '../../docs/Colors.jsx';
+
+# Colors
+
+<Colors />
+---
+title: Conditional Modifiers
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Conditional Modifiers
+
+## lastOf
+
+<JsDoc client:idle name="Pattern.lastOf" h={0} />
+
+## firstOf
+
+<JsDoc client:idle name="Pattern.firstOf" h={0} />
+
+## when
+
+<JsDoc client:idle name="Pattern.when" h={0} />
+
+## chunk
+
+<JsDoc client:idle name="Pattern.chunk" h={0} />
+
+### chunkBack
+
+<JsDoc client:idle name="Pattern.chunkBack" h={0} />
+
+### fastChunk
+
+<JsDoc client:idle name="Pattern.fastChunk" h={0} />
+
+## arp
+
+<JsDoc client:idle name="Pattern#arp" h={0} />
+
+## arpWith 🧪
+
+<JsDoc client:idle name="Pattern#arpWith" h={0} />
+
+## struct
+
+<JsDoc client:idle name="Pattern#struct" h={0} />
+
+## mask
+
+<JsDoc client:idle name="Pattern#mask" h={0} />
+
+## reset
+
+<JsDoc client:idle name="Pattern#reset" h={0} />
+
+## restart
+
+<JsDoc client:idle name="Pattern#restart" h={0} />
+
+## hush
+
+<JsDoc client:idle name="hush" h={0} />
+
+## invert
+
+<JsDoc client:idle name="invert" h={0} />
+
+## pick
+
+<JsDoc client:idle name="pick" h={0} />
+
+## pickmod
+
+<JsDoc client:idle name="pickmod" h={0} />
+
+## pickF
+
+<JsDoc client:idle name="pickF" h={0} />
+
+## pickmodF
+
+<JsDoc client:idle name="pickmodF" h={0} />
+
+## pickRestart
+
+<JsDoc client:idle name="pickRestart" h={0} />
+
+## pickmodRestart
+
+<JsDoc client:idle name="pickmodRestart" h={0} />
+
+## pickReset
+
+<JsDoc client:idle name="pickReset" h={0} />
+
+## pickmodReset
+
+<JsDoc client:idle name="pickmodReset" h={0} />
+
+## inhabit
+
+<JsDoc client:idle name="inhabit" h={0} />
+
+## inhabitmod
+
+<JsDoc client:idle name="inhabitmod" h={0} />
+
+## squeeze
+
+<JsDoc client:idle name="squeeze" h={0} />
+
+After Conditional Modifiers, let's see what [Accumulation Modifiers](/learn/accumulation) have to offer.
+---
+title: Csound
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+import Colors from '../../docs/Colors.jsx';
+
+# Using CSound with Strudel
+
+🧪 Strudel has experimental support for csound, using [@csound/browser](https://www.npmjs.com/package/@csound/browser).
+
+## Importing .orc files
+
+To use existing csound instruments, you can load and use an orc file from an URL like this:
+
+<MiniRepl
+  client:only="react"
+  tune={`// livecode.orc by Steven Yi
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+note("c a f e").csound('FM1')
+`}
+/>
+
+Note that the above url uses the `github:` shortcut, which resolves to the raw file on github, but you can use any URL you like.
+
+The awesome [`livecode.orc by Steven Yi`](https://github.com/kunstmusik/csound-live-code) comes packed with many sounds ready for use:
+
+<MiniRepl
+  client:only="react"
+  tune={`// livecode.orc by Steven Yi
+await loadOrc('github:kunstmusik/csound-live-code/master/livecode.orc')
+note("c a f e").csound(cat(
+"Sub1", // 	Substractive Synth, 3osc
+"Sub2", // 	Subtractive Synth, two saws, fifth freq apart
+"Sub3", // 	Subtractive Synth, three detuned saws, swells in
+"Sub4", // 	Subtractive Synth, detuned square/saw, stabby. Nice as a lead in octave 2, nicely grungy in octave -2, -1
+"Sub5", // 	Subtractive Synth, detuned square/triangle
+"Sub6", // 	Subtractive Synth, saw, K35 filters
+"Sub7", // 	Subtractive Synth, saw + tri, K35 filters
+"Sub8", // 	Subtractive Synth, square + saw + tri, diode ladder filter
+"SynBrass", // 	SynthBrass subtractive synth
+"SynHarp", // 	Synth Harp subtracitve Synth
+"SSaw", // 	SuperSaw sound using 9 bandlimited saws (3 sets of detuned saws at octaves)
+"Mode1", // 	Modal Synthesis Instrument: Percussive/organ-y sound
+"Plk", // 	Pluck sound using impulses, noise, and waveguides
+"Organ1", // 	Wavetable Organ sound using additive synthesis
+"Organ2", // 	Organ sound based on M1 Organ 2 patch
+"Organ3", // 	Wavetable Organ using Flute 8' and Flute 4', wavetable based on Claribel Flute http://www.pykett.org.uk/the\_tonal\_structure\_of\_organ\_flutes.htm
+"Bass", // 	Subtractive Bass sound
+"ms20_bass", // 	MS20-style Bass Sound
+"VoxHumana", // 	VoxHumana Patch
+"FM1", // 	FM 3:1 C:M ratio, 2->0.025 index, nice for bass
+"Noi", // 	Filtered noise, exponential envelope
+"Wobble", // 	Wobble patched based on Jacob Joaquin's "Tempo-Synced Wobble Bass"
+"Sine", // 	Simple Sine-wave instrument with exponential envelope
+"Square", // 	Simple Square-wave instrument with exponential envelope
+"Saw", // 	Simple Sawtooth-wave instrument with exponential envelope
+"Squine1", // 	Squinewave Synth, 2 osc
+"Form1", // 	Formant Synth, buzz source, soprano ah formants
+"Mono", // 	Monophone synth using sawtooth wave and 4pole lpf. Use "start("Mono") to run the monosynth, then use MonoNote instrument to play the instrument.
+"MonoNote", // 	Note playing instrument for Mono synth. Be careful to use this and not try to create multiple Mono instruments!
+"Click", // 	Bandpass-filtered impulse glitchy click sound. p4 = center frequency (e.g., 3000, 6000)
+"NoiSaw", // 	Highpass-filtered noise+saw sound. Use NoiSaw.cut channel to adjust cutoff.
+"Clap", // 	Modified clap instrument by Istvan Varga (clap1.orc)
+"BD", // 	Bass Drum - From Iain McCurdy's TR-808.csd
+"SD", // 	Snare Drum - From Iain McCurdy's TR-808.csd
+"OHH", // 	Open High Hat - From Iain McCurdy's TR-808.csd
+"CHH", // 	Closed High Hat - From Iain McCurdy's TR-808.csd
+"HiTom", // 	High Tom - From Iain McCurdy's TR-808.csd
+"MidTom", // 	Mid Tom - From Iain McCurdy's TR-808.csd
+"LowTom", // 	Low Tom - From Iain McCurdy's TR-808.csd
+"Cymbal", // 	Cymbal - From Iain McCurdy's TR-808.csd
+"Rimshot", // 	Rimshot - From Iain McCurdy's TR-808.csd
+"Claves", // 	Claves - From Iain McCurdy's TR-808.csd
+"Cowbell", // 	Cowbell - From Iain McCurdy's TR-808.csd
+"Maraca", // 	Maraca - from Iain McCurdy's TR-808.csd
+"HiConga", // 	High Conga - From Iain McCurdy's TR-808.csd
+"MidConga", // 	Mid Conga - From Iain McCurdy's TR-808.csd
+"LowConga", // 	Low Conga - From Iain McCurdy's TR-808.csd
+))`}
+/>
+
+## Writing your own instruments
+
+You can define your own instrument(s) with `loadCsound` like this:
+
+<MiniRepl
+  client:only="react"
+tune={`await loadCsound\`
+instr CoolSynth
+    iduration = p3
+    ifreq = p4
+    igain = p5
+    ioct = octcps(ifreq)
+
+    kpwm = oscili(.05, 8)
+    asig = vco2(igain, ifreq, 4, .5 + kpwm)
+    asig += vco2(igain, ifreq * 2)
+
+    idepth = 2
+    acut = transegr:a(0, .005, 0, idepth, .06, -4.2, 0.001, .01, -4.2, 0) ; filter envelope
+    asig = zdf_2pole(asig, cpsoct(ioct + acut + 2), 0.5)
+
+    iattack = .01
+    isustain = .5
+    idecay = .1
+    irelease = .1
+    asig *= linsegr:a(0, iattack, 1, idecay, isustain, iduration, isustain, irelease, 0)
+
+    out(asig, asig)
+
+endin\`
+
+"<0 2 [4 6](3,4,2) 3\*2>"
+.off(1/4, add(2))
+.off(1/2, add(6))
+.scale('D minor')
+.note()
+.csound('CoolSynth')`}
+/>
+
+## Parameters
+
+The `.csound` function sends the following p values:
+
+|     |                                  |
+| --- | -------------------------------- |
+| p1  | instrument name e.g. `CoolSynth` |
+| p2  | time offset, when it should play |
+| p3  | the duration of the event / hap  |
+| p4  | frequency in Hertz               |
+| p5  | normalized `gain`, 0-1           |
+
+There is an alternative `.csoundm` function with a different flavor:
+
+|     |                                   |
+| --- | --------------------------------- |
+| p4  | midi key number, unrounded, 0-127 |
+| p5  | midi velocity, 0-127              |
+
+In both cases, p4 is derived from the value of `freq` or `note`.
+
+## Limitations / Future Plans
+
+Apart from the above listed p values, no other parameter can be patterned so far.
+This also means that [audio effects](/learn/effects/) will not work.
+In the future, the integration could be improved by passing all patterned control parameters to the csound instrument.
+This could work by a unique [channel](https://kunstmusik.github.io/icsc2022-csound-web/tutorial2-interacting-with-csound/#step-4---writing-continuous-data-channels)
+for each value. Channels could be read [like this](https://github.com/csound/csound/blob/master/Android/CsoundForAndroid/CsoundAndroidExamples/src/main/res/raw/multitouch_xy.csd).
+Also, it might make sense to have a standard library of csound instruments for strudel's effects.
+
+Now, let's dive into the [Functional JavaScript API](/functions/intro)
+---
+title: Device Motion
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+import DeviceMotion from '@strudel/motion/docs/devicemotion.mdx';
+
+<DeviceMotion />
+---
+title: Audio effects
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Audio Effects
+
+Whether you're using a synth or a sample, you can apply any of the following built-in audio effects.
+As you might suspect, the effects can be chained together, and they accept a pattern string as their argument.
+
+# Filters
+
+Filters are an essential building block of [subtractive synthesis](https://en.wikipedia.org/wiki/Subtractive_synthesis).
+Strudel comes with 3 types of filters:
+
+- low-pass filter: low frequencies may _pass_, high frequencies are cut off
+- high-pass filter: high frequencies may _pass_, low frequencies are cut off
+- band-pass filters: only a frequency band may _pass_, low and high frequencies around are cut off
+
+Each filter has 2 parameters:
+
+- cutoff: the frequency at which the filter starts to work. e.g. a low-pass filter with a cutoff of 1000Hz allows frequencies below 1000Hz to pass.
+- q-value: Controls the resonance of the filter. Higher values sound more aggressive. Also see [Q-Factor](https://en.wikipedia.org/wiki/Q_factor)
+
+## lpf
+
+<JsDoc client:idle name="lpf" h={0} />
+
+## lpq
+
+<JsDoc client:idle name="lpq" h={0} />
+
+## hpf
+
+<JsDoc client:idle name="hpf" h={0} />
+
+## hpq
+
+<JsDoc client:idle name="hpq" h={0} />
+
+## bpf
+
+<JsDoc client:idle name="bpf" h={0} />
+
+## bpq
+
+<JsDoc client:idle name="bpq" h={0} />
+
+## ftype
+
+<JsDoc client:idle name="ftype" h={0} />
+
+## vowel
+
+<JsDoc client:idle name="vowel" h={0} />
+
+# Amplitude Envelope
+
+The amplitude [envelope](<https://en.wikipedia.org/wiki/Envelope_(music)>) controls the dynamic contour of a sound.
+Strudel uses ADSR envelopes, which are probably the most common way to describe an envelope:
+
+![ADSR](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/ADSR_parameter.svg/1920px-ADSR_parameter.svg.png)
+
+[image link](https://commons.wikimedia.org/wiki/File:ADSR_parameter.svg)
+
+## attack
+
+<JsDoc client:idle name="attack" h={0} />
+
+## decay
+
+<JsDoc client:idle name="decay" h={0} />
+
+## sustain
+
+<JsDoc client:idle name="sustain" h={0} />
+
+## release
+
+<JsDoc client:idle name="release" h={0} />
+
+## adsr
+
+<JsDoc client:idle name="adsr" h={0} />
+
+# Filter Envelope
+
+Each filter can receive an additional filter envelope controlling the cutoff value dynamically. It uses an ADSR envelope similar to the one used for amplitude. There is an additional parameter to control the depth of the filter modulation: `lpenv`|`hpenv`|`bpenv`. This allows you to play subtle or huge filter modulations just the same by only increasing or decreasing the depth.
+
+<MiniRepl
+  client:idle
+  tune={`note("[c eb g <f bb>](3,8,<0 1>)".sub(12))
+  .s("<sawtooth>/64")
+  .lpf(sine.range(300,2000).slow(16))
+  .lpa(0.005)
+  .lpd(perlin.range(.02,.2))
+  .lps(perlin.range(0,.5).slow(3))
+  .lpq(sine.range(2,10).slow(32))
+  .release(.5)
+  .lpenv(perlin.range(1,8).slow(2))
+  .ftype('24db')
+  .room(1)
+  .juxBy(.5,rev)
+  .sometimes(add(note(12)))
+  .stack(s("bd*2").bank('RolandTR909'))
+  .gain(.5).fast(2)`}
+/>
+
+There is one filter envelope for each filter type and thus one set of envelope filter parameters preceded either by `lp`, `hp` or `bp`:
+
+- `lpattack`, `lpdecay`, `lpsustain`, `lprelease`, `lpenv`: filter envelope for the lowpass filter.
+  - alternatively: `lpa`, `lpd`, `lps`, `lpr` and `lpe`.
+- `hpattack`, `hpdecay`, `hpsustain`, `hprelease`, `hpenv`: filter envelope for the highpass filter.
+  - alternatively: `hpa`, `hpd`, `hps`, `hpr` and `hpe`.
+- `bpattack`, `bpdecay`, `bpsustain`, `bprelease`, `bpenv`: filter envelope for the bandpass filter.
+  - alternatively: `bpa`, `bpd`, `bps`, `bpr` and `bpe`.
+
+## lpattack
+
+<JsDoc client:idle name="lpattack" h={0} />
+
+## lpdecay
+
+<JsDoc client:idle name="lpdecay" h={0} />
+
+## lpsustain
+
+<JsDoc client:idle name="lpsustain" h={0} />
+
+## lprelease
+
+<JsDoc client:idle name="lprelease" h={0} />
+
+## lpenv
+
+<JsDoc client:idle name="lpenv" h={0} />
+
+# Pitch Envelope
+
+You can also control the pitch with envelopes!
+Pitch envelopes can breathe life into static sounds:
+
+<MiniRepl
+  client:idle
+  tune={`n("<-4,0 5 2 1>*<2!3 4>")
+  .scale("<C F>/8:pentatonic")
+  .s("gm_electric_guitar_jazz")
+  .penv("<.5 0 7 -2>*2").vib("4:.1")
+  .phaser(2).delay(.25).room(.3)
+  .size(4).fast(1.5)`}
+/>
+
+You also create some lovely chiptune-style sounds:
+
+<MiniRepl
+  client:idle
+  tune={`n(run("<4 8>/16")).jux(rev)
+.chord("<C^7 <Db^7 Fm7>>")
+.dict('ireal')
+.voicing().add(note("<0 1>/8"))
+.dec(.1).room(.2)
+.segment("<4 [2 8]>")
+.penv("<0 <2 -2>>").patt(.02).fast(2)`}
+/>
+
+Let's break down all pitch envelope controls:
+
+## pattack
+
+<JsDoc client:idle name="pattack" h={0} />
+
+## pdecay
+
+<JsDoc client:idle name="pdecay" h={0} />
+
+## prelease
+
+<JsDoc client:idle name="prelease" h={0} />
+
+## penv
+
+<JsDoc client:idle name="penv" h={0} />
+
+## pcurve
+
+<JsDoc client:idle name="pcurve" h={0} />
+
+## panchor
+
+<JsDoc client:idle name="panchor" h={0} />
+
+# Dynamics
+
+## gain
+
+<JsDoc client:idle name="gain" h={0} />
+
+## velocity
+
+<JsDoc client:idle name="velocity" h={0} />
+
+## compressor
+
+<JsDoc client:idle name="compressor" h={0} />
+
+## postgain
+
+<JsDoc client:idle name="postgain" h={0} />
+
+## xfade
+
+<JsDoc client:idle name="xfade" h={0} />
+
+# Panning
+
+## jux
+
+<JsDoc client:idle name="jux" h={0} />
+
+## juxBy
+
+<JsDoc client:idle name="juxBy" h={0} />
+
+## pan
+
+<JsDoc client:idle name="pan" h={0} />
+
+# Waveshaping
+
+## coarse
+
+<JsDoc client:idle name="coarse" h={0} />
+
+## crush
+
+<JsDoc client:idle name="crush" h={0} />
+
+## distort
+
+<JsDoc client:idle name="distort" h={0} />
+
+# Global Effects
+
+## Local vs Global Effects
+
+While the above listed "local" effects will always create a separate effects chain for each event,
+global effects use the same chain for all events of the same orbit:
+
+## orbit
+
+<JsDoc client:idle name="orbit" h={0} />
+
+## Delay
+
+### delay
+
+<JsDoc client:idle name="delay" h={0} />
+
+### delaytime
+
+<JsDoc client:idle name="delaytime" h={0} />
+
+### delayfeedback
+
+<JsDoc client:idle name="delayfeedback" h={0} />
+
+## Reverb
+
+### room
+
+<JsDoc client:idle name="room" h={0} />
+
+### roomsize
+
+<JsDoc client:idle name="roomsize" h={0} />
+
+### roomfade
+
+<JsDoc client:idle name="roomfade" h={0} />
+
+### roomlp
+
+<JsDoc client:idle name="roomlp" h={0} />
+
+### roomdim
+
+<JsDoc client:idle name="roomdim" h={0} />
+
+### iresponse
+
+<JsDoc client:idle name="iresponse" h={0} />
+
+## Phaser
+
+### phaser
+
+<JsDoc client:idle name="phaser" h={0} />
+
+### phaserdepth
+
+<JsDoc client:idle name="phaserdepth" h={0} />
+
+### phasercenter
+
+<JsDoc client:idle name="phasercenter" h={0} />
+
+### phasersweep
+
+<JsDoc client:idle name="phasersweep" h={0} />
+
+Next, we'll look at input / output via [MIDI, OSC and other methods](/learn/input-output).
+---
+title: Creating Patterns
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Creating Patterns
+
+The following functions will return a pattern.
+These are the equivalents used by the Mini Notation:
+
+| function                       | mini             |
+| ------------------------------ | ---------------- |
+| `cat(x, y)`                    | `"<x y>"`        |
+| `seq(x, y)`                    | `"x y"`          |
+| `stack(x, y)`                  | `"x,y"`          |
+| `stepcat([3,x],[2,y])`         | `"x@3 y@2"`      |
+| `polymeter([a, b, c], [x, y])` | `"{a b c, x y}"` |
+| `polymeterSteps(2, x, y, z)`   | `"{x y z}%2"`    |
+| `silence`                      | `"~"`            |
+
+## cat
+
+<JsDoc client:idle name="cat" h={0} />
+
+## seq
+
+<JsDoc client:idle name="seq" h={0} />
+
+## stack
+
+<JsDoc client:idle name="stack" h={0} />
+
+## stepcat
+
+<JsDoc client:idle name="stepcat" h={0} />
+
+## arrange
+
+<JsDoc client:idle name="arrange" h={0} />
+
+## polymeter
+
+<JsDoc client:idle name="polymeter" h={0} />
+
+## polymeterSteps
+
+<JsDoc client:idle name="polymeterSteps" h={0} />
+
+## silence
+
+<JsDoc client:idle name="silence" h={0} />
+
+## run
+
+<JsDoc client:idle name="run" h={0} />
+
+## binary
+
+<JsDoc client:idle name="binary" h={0} />
+
+## binaryN
+
+<JsDoc client:idle name="binaryN" h={0} />
+
+After Pattern Constructors, let's see what [Time Modifiers](/learn/time-modifiers) are available.
+---
+title: Getting Started
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Welcome
+
+Welcome to the Strudel documentation pages!
+
+These pages will introduce you to [Strudel](https://strudel.cc/), a web-based [live coding](https://github.com/toplap/awesome-livecoding/) environment that implements the [Tidal Cycles](https://tidalcycles.org) algorithmic pattern language.
+
+# What is Strudel?
+
+[Strudel](https://strudel.cc/) is a version of [Tidal Cycles](https://tidalcycles.org) written in [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), initiated by [Alex McLean](https://slab.org) and [Felix Roos](https://froos.cc/) in 2022.
+Tidal Cycles, also known as Tidal, is a language for [algorithmic pattern](https://algorithmicpattern.org), and though it is most commonly used for [making music](https://tidalcycles.org/docs/showcase), it can be used for any kind of pattern making activity, including [weaving](https://www.youtube.com/watch?v=TfEmEsusXjU).
+
+Tidal was first implemented as a library written in the [Haskell](https://www.haskell.org/) functional programming language, and by itself it does not make any sound.
+To make sound, it has to be connected to a sound engine, and by default this is a [SuperCollider](https://supercollider.github.io/) plugin called [SuperDirt](https://github.com/musikinformatik/SuperDirt/).
+As such, it can be difficult for first-time users to install both Tidal Cycles and SuperDirt, as there are many small details to get right.
+Strudel however runs directly in your web browser, does not require any custom software installation, and can make sound all by itself.
+
+# Strudel REPL and MiniREPL
+
+The main place to actually make music with Strudel is the [Strudel REPL](https://strudel.cc/) ([what is a REPL?](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)), but in these pages you will also encounter interactive "MiniREPLs" where you can listen to and edit Strudel patterns.
+Try clicking the play icon below:
+
+<MiniRepl client:idle tune={`s("bd sd")`} punchcard />
+
+Then edit the text so it reads `s("bd sd cp hh")` and click the refresh icon.
+Congratulations, you have now live coded your first Strudel pattern!
+
+With Strudel, you can expressively write dynamic music pieces.
+You don't need to know JavaScript or Tidal Cycles to make music with Strudel.
+This interactive tutorial will guide you through the basics of Strudel.
+
+# Show me some demos!
+
+To see and hear what Strudel can do, visit the [Strudel REPL](https://strudel.cc/) and click the Shuffle icon in the top menu bar.
+You can get a feel for Strudel by browsing and editing these examples and clicking the Refresh icon to update.
+
+You can also browse through the examples [here](/examples).
+
+Alternatively, you can get a taste of what Strudel can do by clicking play on this track:
+
+<MiniRepl
+  client:idle
+  tune={`samples({
+  bd: ['bd/BT0AADA.wav','bd/BT0AAD0.wav','bd/BT0A0DA.wav','bd/BT0A0D3.wav','bd/BT0A0D0.wav','bd/BT0A0A7.wav'],
+  sd: ['sd/rytm-01-classic.wav','sd/rytm-00-hard.wav'],
+  hh: ['hh27/000_hh27closedhh.wav','hh/000_hh3closedhh.wav'],
+}, 'github:tidalcycles/dirt-samples');
+stack(
+s("bd,[~ <sd!3 sd(3,4,2)>],hh*8") // drums
+.speed(perlin.range(.7,.9)) // random sample speed variation
+,"<a1 b1\*2 a1(3,8) e2>" // bassline
+.off(1/8,x=>x.add(12).degradeBy(.5)) // random octave jumps
+.add(perlin.range(0,.5)) // random pitch variation
+.superimpose(add(.05)) // add second, slightly detuned voice
+.note() // wrap in "note"
+.decay(.15).sustain(0) // make each note of equal length
+.s('sawtooth') // waveform
+.gain(.4) // turn down
+.cutoff(sine.slow(7).range(300,5000)) // automate cutoff
+,"<Am7!3 <Em7 E7b13 Em7 Ebm7b5>>".voicings('lefthand') // chords
+.superimpose(x=>x.add(.04)) // add second, slightly detuned voice
+.add(perlin.range(0,.5)) // random pitch variation
+.note() // wrap in "note"
+.s('sawtooth') // waveform
+.gain(.16) // turn down
+.cutoff(500) // fixed cutoff
+.attack(1) // slowly fade in
+)
+.slow(3/2)`}
+/>
+
+# Strudel is a work in progress 🚧
+
+Please note that this project is still in its experimental state.
+In the future, parts of it might change significantly.
+This tutorial is also far from complete.
+You can contribute to it clicking 'Edit this page' in the top right, or by visiting the [Strudel GitHub page](https://codeberg.org/uzu/strudel/).
+
+# What's next?
+
+Head on over to the [Notes](/learn/notes) page.
+
+<br />
+---
+title: Hydra
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+
+# Using Hydra inside Strudel
+
+You can write [hydra](https://hydra.ojack.xyz/) code in strudel! All you have to do is to call `await initHydra()` at the top:
+
+<MiniRepl
+  client:only="react"
+  tune={`await initHydra()
+// licensed with CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
+// by Zach Krall
+// http://zachkrall.online/
+
+osc(10, 0.9, 300)
+.color(0.9, 0.7, 0.8)
+.diff(
+osc(45, 0.3, 100)
+.color(0.9, 0.9, 0.9)
+.rotate(0.18)
+.pixelate(12)
+.kaleid()
+)
+.scrollX(10)
+.colorama()
+.luma()
+.repeatX(4)
+.repeatY(4)
+.modulate(
+osc(1, -0.9, 300)
+)
+.scale(2)
+.out()
+
+note("[a,c,e,<a4 ab4 g4 gb4>,b4]/2")
+.s("sawtooth").vib(2)
+.lpf(600).lpa(2).lpenv(6)
+`}
+/>
+
+## H patterns
+
+There is a special function `H` that allows you to use a pattern as an input to hydra:
+
+<MiniRepl
+  client:only="react"
+  tune={`await initHydra()
+let pattern = "3 4 5 [6 7]*2"
+shape(H(pattern)).out(o0)
+n(pattern).scale("A:minor").piano().room(1)
+`}
+/>
+
+## detectAudio
+
+To use hydra audio capture, call `initHydra` with `{detectAudio:true}` configuration param:
+
+<MiniRepl
+  client:only="react"
+  tune={`await initHydra({detectAudio:true})
+let pattern = "<3 4 5 [6 7]*2>"
+shape(H(pattern)).repeat()
+  .scrollY(
+    ()=> a.fft[0]*.25
+  )
+  .add(src(o0).color(.71 ).scrollX(.005),.95)
+.out(o0)
+n(pattern).scale("A:minor").piano().room(1)
+`}
+/>
+
+You might now be able to see this properly here: [open in REPL](/#YXdhaXQgaW5pdEh5ZHJhKCkKbGV0IHBhdHRlcm4gPSAiMyA0IDUgWzYgN10qMiIKc2hhcGUoSChwYXR0ZXJuKSkub3V0KG8wKQpuKHBhdHRlcm4pLnNjYWxlKCJBOm1pbm9yIikucGlhbm8oKS5yb29tKDEpIA%3D%3D)
+
+Similar to `detectAudio`, all the [available hydra options](https://github.com/hydra-synth/hydra-synth#api) can be passed to `initHydra`.
+
+## feedStrudel
+
+Using the `feedStrudel` option, you can transform strudel visualizations with hydra:
+
+<MiniRepl
+  client:only="react"
+  tune={`await initHydra({feedStrudel:1})
+//
+src(s0).kaleid(H("<4 5 6>"))
+  .diff(osc(1,0.5,5))
+  .modulateScale(osc(2,-0.25,1))
+  .out()
+//
+
+$: s("bd*4,[hh:0:<.5 1>]*8,~ rim").bank("RolandTR909").speed(.9)
+
+$: note("[<g1!3 <bb1 <f1 d1>>>]\*3").s("sawtooth")
+
+.room(.75).sometimes(add(note(12))).clip(.3)
+.lpa(.05).lpenv(-4).lpf(2000).lpq(8).ftype('24db')
+
+all(x=>x.fft(4).scope({pos:0,smear:.95}))`}
+/>
+---
+title: Input Devices
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+import Gamepad from '@strudel/gamepad/docs/gamepad.mdx';
+
+# Input Devices
+
+Strudel supports various input devices like Gamepads and MIDI controllers to manipulate patterns in real-time.
+
+<Gamepad />
+---
+title: MIDI, OSC & MQTT
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# MIDI, OSC and MQTT
+
+Normally, Strudel is used to pattern sound, using its own '[web audio](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)'-based synthesiser called [SuperDough](https://codeberg.org/uzu/strudel/src/branch/main/packages/superdough).
+
+It is also possible to pattern other things with Strudel, such as software and hardware synthesisers with MIDI, other software using Open Sound Control/OSC (including the [SuperDirt](https://github.com/musikinformatik/SuperDirt/) synthesiser commonly used with Strudel's sibling [TidalCycles](https://tidalcycles.org/)), or the MQTT 'internet of things' protocol.
+
+# MIDI
+
+Strudel supports MIDI without any additional software (thanks to [webmidi](https://npmjs.com/package/webmidi)), just by adding methods to your pattern:
+
+## midiin(inputName?)
+
+<JsDoc client:idle name="midin" h={0} />
+
+## midi(outputName?,options?)
+
+Either connect a midi device or use the IAC Driver (Mac) or Midi Through Port (Linux) for internal midi messages.
+If no outputName is given, it uses the first midi output it finds.
+
+<MiniRepl
+  client:idle
+  tune={`
+$: chord("<C^7 A7 Dm7 G7>").voicing().midi('IAC Driver')
+`}
+/>
+
+In the console, you will see a log of the available MIDI devices as soon as you run the code,
+e.g.
+
+```
+ `Midi connected! Using "Midi Through Port-0".`
+```
+
+The `.midi()` function accepts an options object with the following properties:
+
+<MiniRepl
+  client:idle
+  tune={`$: note("d e c a f").midi('IAC Driver', { isController: true, midimap: 'default'})
+`}
+/>
+
+<details>
+<summary>Available Options</summary>
+
+| Option       | Type          | Default   | Description                                                            |
+| ------------ | ------------- | --------- | ---------------------------------------------------------------------- |
+| isController | boolean       | false     | When true, disables sending note messages. Useful for MIDI controllers |
+| latencyMs    | number        | 34        | Latency in milliseconds to align MIDI with audio engine                |
+| noteOffsetMs | number        | 10        | Offset in milliseconds for note-off messages to prevent glitching      |
+| midichannel  | number        | 1         | Default MIDI channel (1-16)                                            |
+| velocity     | number        | 0.9       | Default note velocity (0-1)                                            |
+| gain         | number        | 1         | Default gain multiplier for velocity (0-1)                             |
+| midimap      | string        | 'default' | Name of MIDI mapping to use for control changes                        |
+| midiport     | string/number | -         | MIDI device name or index                                              |
+
+</details>
+
+### midiport(outputName)
+
+Selects the MIDI output device to use, pattern can be used to switch between devices.
+
+```javascript
+$: midiport('IAC Driver');
+$: note('c a f e').midiport('<0 1 2 3>').midi();
+```
+
+<JsDoc client:idle name="midiport" h={0} />
+
+## midichan(number)
+
+Selects the MIDI channel to use. If not used, `.midi` will use channel 1 by default.
+
+## midicmd(command)
+
+`midicmd` sends MIDI system real-time messages to control timing and transport on MIDI devices.
+
+It supports the following commands:
+
+- `clock`/`midiClock` - Sends MIDI timing clock messages
+- `start` - Sends MIDI start message
+- `stop` - Sends MIDI stop message
+- `continue` - Sends MIDI continue message
+
+// You can control the clock with a pattern and ensure it starts in sync when the repl begins.
+// Note: It might act unexpectedly if MIDI isn't set up initially.
+
+<MiniRepl
+  client:idle
+  tune={`$:stack(
+  midicmd("clock*48,<start stop>/2").midi('IAC Driver')
+)`}
+/>
+
+## control, ccn && ccv
+
+- `control` sends MIDI control change messages to your MIDI device.
+- `ccn` sets the cc number. Depends on your synths midi mapping
+- `ccv` sets the cc value. normalized from 0 to 1.
+
+<MiniRepl client:idle tune={`note("c a f e").control([74, sine.slow(4)]).midi()`} />
+
+<MiniRepl client:idle tune={`note("c a f e").ccn(74).ccv(sine.slow(4)).midi()`} />
+
+In the above snippet, `ccn` is set to 74, which is the filter cutoff for many synths. `ccv` is controlled by a saw pattern.
+Having everything in one pattern, the `ccv` pattern will be aligned to the note pattern, because the structure comes from the left by default.
+But you can also control cc messages separately like this:
+
+<MiniRepl
+  client:idle
+  tune={`$: note("c a f e").midi()
+$: ccv(sine.segment(16).slow(4)).ccn(74).midi()`}
+/>
+
+Instead of setting `ccn` and `ccv` directly, you can also create mappings with `midimaps`:
+
+## midimaps
+
+<JsDoc client:idle name="midimaps" h={0} />
+
+## defaultmidimap
+
+<JsDoc client:idle name="defaultmidimap" h={0} />
+
+## progNum (Program Change)
+
+`progNum` sends MIDI program change messages to switch between different presets/patches on your MIDI device.
+Program change values should be numbers between 0 and 127.
+
+<MiniRepl client:idle tune={`// Switch between programs 0 and 1 every cycle
+progNum("<0 1>").midi()
+
+// Play notes while changing programs
+note("c3 e3 g3").progNum("<0 1 2>").midi()`} />
+
+Program change messages are useful for switching between different instrument sounds or presets during a performance.
+The exact sound that each program number maps to depends on your MIDI device's configuration.
+
+## sysex, sysexid && sysexdata (System Exclusive Message)
+
+`sysex` sends MIDI System Exclusive (SysEx) messages to your MIDI device.
+ysEx messages are device-specific commands that allow deeper control over synthesizer parameters.
+The value should be an array of numbers between 0-255 representing the SysEx data bytes.
+
+<MiniRepl
+  client:idle
+  tune={`// Send a simple SysEx message
+let id = 0x43; //Yamaha
+//let id = "0x00:0x20:0x32"; //Behringer ID can be an array of numbers
+let data = "0x79:0x09:0x11:0x0A:0x00:0x00"; // Set NSX-39 voice to say "Aa"
+$: note("c a f e").sysex(id, data).midi();
+$: note("c a f e").sysexid(id).sysexdata(data).midi();`}
+/>
+
+The exact format of SysEx messages depends on your MIDI device's specification.
+Consult your device's MIDI implementation guide for details on supported SysEx messages.
+
+## midibend && miditouch
+
+`midibend` sets MIDI pitch bend (-1 - 1)
+`miditouch` sets MIDI key after touch (0-1)
+
+<MiniRepl client:idle tune={`note("c a f e").midibend(sine.slow(4).range(-0.4,0.4)).midi()`} />
+
+<MiniRepl client:idle tune={`note("c a f e").miditouch(sine.slow(4).range(0,1)).midi()`} />
+
+# OSC/SuperDirt/StrudelDirt
+
+In TidalCycles, sound is usually generated using [SuperDirt](https://github.com/musikinformatik/SuperDirt/), which runs inside SuperCollider. Strudel also supports using SuperDirt, although it requires installing some additional software.
+
+There is also [StrudelDirt](https://github.com/daslyfe/StrudelDirt) which is SuperDirt with some optimisations for working with Strudel. (A longer term aim is to merge these optimisations back into mainline SuperDirt)
+
+## Prequisites
+
+To get SuperDirt to work with Strudel, you need to
+
+1. install SuperCollider + sc3 plugins, see [Tidal Docs](https://tidalcycles.org/docs/) (Install Tidal) for more info.
+2. install SuperDirt, or the [StrudelDirt](https://github.com/daslyfe/StrudelDirt) fork which is optimised for use with Strudel
+3. install [node.js](https://nodejs.org/en/)
+4. download [Strudel Repo](https://codeberg.org/uzu/strudel/) (or git clone, if you have git installed)
+5. run `pnpm i` in the strudel directory
+6. run `pnpm run osc` to start the osc server, which forwards OSC messages from Strudel REPL to SuperCollider
+
+Now you're all set!
+
+## Usage
+
+1. Start SuperCollider, either using SuperCollider IDE or by running `sclang` in a terminal
+2. Open the [Strudel REPL](https://strudel.cc/#cygiYmQgc2QiKS5vc2MoKQ%3D%3D)
+
+...or test it here:
+
+<MiniRepl client:only="react" tune={`s("bd sd").osc()`} />
+
+If you now hear sound, congratulations! If not, you can get help on the [#strudel channel in the TidalCycles discord](https://discord.com/invite/HGEdXmRkzT).
+
+Note: if you have the 'Audio Engine Target' in settings set to 'OSC', you do not need to add .osc() to the end of your pattern.
+
+### Pattern.osc
+
+<JsDoc client:idle name="Pattern.osc" h={0} />
+
+## SuperDirt Params
+
+Please refer to [Tidal Docs](https://tidalcycles.org/) for more info.
+
+<br />
+
+But can we use Strudel [offline](/learn/pwa)?
+
+# MQTT
+
+MQTT is a lightweight network protocol, designed for 'internet of things' devices. For use with strudel, you will
+need access to an MQTT server known as a 'broker' configured to accept secure 'websocket' connections. You could
+run one yourself (e.g. by running [mosquitto](https://mosquitto.org/)), although getting an SSL certificate that
+your web browser will trust might be a bit tricky for those without systems administration experience.
+Alternatively, you can use [a public broker](https://www.hivemq.com/mqtt/public-mqtt-broker/).
+
+Strudel does not yet support receiving messages over MQTT, only sending them.
+
+## Usage
+
+The following example shows how to send a pattern to an MQTT broker:
+
+<MiniRepl
+  client:only="react"
+  tune={`"hello world"
+    .mqtt(undefined, // username (undefined for open/public servers)
+          undefined, // password
+          '/strudel-pattern', // mqtt 'topic'
+          'wss://mqtt.eclipseprojects.io:443/mqtt', // MQTT server address
+          'mystrudel', // MQTT client id - randomly generated if not supplied
+          0 // latency / delay before sending messages (0 = no delay)
+         )`}
+
+/>
+
+Other software can then receive the messages. For example using the [mosquitto](https://mosquitto.org/) commandline client tools:
+
+```
+
+> mosquitto_sub -h mqtt.eclipseprojects.io -p 1883 -t "/strudel-pattern"
+> hello
+> world
+> hello
+> world
+> ...
+
+```
+
+Control patterns will be encoded as JSON, for example:
+
+<MiniRepl
+  client:only="react"
+  tune={`sound("sax(3,8)").speed("2 3")
+  .mqtt(undefined, // username (undefined for open/public servers)
+        undefined, // password
+        '/strudel-pattern', // mqtt 'topic'
+        'wss://mqtt.eclipseprojects.io:443/mqtt', // MQTT server address
+        'mystrudel', // MQTT client id - randomly generated if not supplied
+        0 // latency / delay before sending messages (0 = no delay)
+       )`}
+/>
+
+Will send messages like the following:
+
+```
+
+{"s":"sax","speed":2}
+{"s":"sax","speed":2}
+{"s":"sax","speed":3}
+{"s":"sax","speed":2}
+...
+
+```
+
+Libraries for receiving MQTT are available for many programming languages.
+
+```
+
+```
+---
+title: Music metadata
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Music metadata
+
+You can optionally add some music metadata in your Strudel code, by using tags in code comments:
+
+```js
+// @title Hey Hoo
+// @by Sam Tagada
+// @license CC BY-NC-SA
+```
+
+Like other comments, those are ignored by Strudel, but it can be used by other tools to retrieve some information about the music.
+
+## Alternative syntax
+
+You can also use comment blocks:
+
+```js
+/*
+@title Hey Hoo
+@by Sam Tagada
+@license CC BY-NC-SA
+*/
+```
+
+Or define multiple tags in one line:
+
+```js
+// @title Hey Hoo @by Sam Tagada @license CC BY-NC-SA
+```
+
+The `title` tag has an alternative syntax using quotes (must be defined at the very begining):
+
+```js
+// "Hey Hoo" @by Sam Tagada
+```
+
+## Tags list
+
+Available tags are:
+
+- `@title`: music title
+- `@by`: music author(s), separated by comma, eventually followed with a link in `<>` (ex: `@by John Doe <https://example.com>`)
+- `@license`: music license(s), e.g. CC BY-NC-SA. Unsure? [Choose a creative commons license here](https://creativecommons.org/choose/)
+- `@details`: some additional information about the music
+- `@url`: web page(s) related to the music (git repo, soundcloud link, etc.)
+- `@genre`: music genre(s) (pop, jazz, etc)
+- `@album`: music album name
+
+## Multiple values
+
+Some of them accepts several values, using the comma or new line separator, or duplicating the tag:
+
+```js
+/*
+@by Sam Tagada
+    Jimmy
+@genre pop, jazz
+@url https://example.com
+@url https://example.org
+*/
+```
+
+You can also add optional prefixes and use tags where you want:
+
+```js
+/*
+song @by Sam Tagada
+samples @by Jimmy
+*/
+...
+note("a3 c#4 e4 a4") // @by Sandy
+```
+
+## Multiline
+
+If a tag doesn't accept a list, it can take multi-line values:
+
+```js
+/*
+@details I wrote this song in February 19th, 2023.
+         It was around midnight and I was lying on
+         the sofa in the living room.
+*/
+```
+---
+title: Mini Notation
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Mini-notation
+
+Just like [Tidal Cycles](https://tidalcycles.org/), Strudel uses a so called "Mini-Notation", which is a custom language that is designed for writing rhythmic patterns using little amounts of text.
+
+## Note
+
+This page just explains the entirety of the Mini-Notation syntax.
+If you are just getting started with Strudel, you can learn the basics of the Mini-Notation in a more practical manner in the [workshop](/workshop/first-sounds).
+After that, you can come back here if you want to understand every little detail.
+
+## Example
+
+Before diving deeper into the details, here is a flavour of how the Mini-Notation looks like:
+
+<MiniRepl
+  client:idle
+  tune={`note(\`<
+[e5 [b4 c5] d5 [c5 b4]]
+[a4 [a4 c5] e5 [d5 c5]]
+[b4 [~ c5] d5 e5]
+[c5 a4 a4 ~]
+[[~ d5] [~ f5] a5 [g5 f5]]
+[e5 [~ c5] e5 [d5 c5]]
+[b4 [b4 c5] d5 e5]
+[c5 a4 a4 ~]
+,
+[[e2 e3]*4]
+[[a2 a3]*4]
+[[g#2 g#3]*2 [e2 e3]*2]
+[a2 a3 a2 a3 a2 a3 b1 c2]
+[[d2 d3]*4]
+[[c2 c3]*4]
+[[b1 b2]*2 [e2 e3]*2]
+[[a1 a2]*4]
+>\`)`}
+/>
+
+## Mini Notation Format
+
+The snippet above is enclosed in backticks (`), which allows you to write multi-line strings.
+
+You can also use regular double quotes (`"`) for single line mini-notation, as we have done already.
+
+If you do just want to get a regular string that is _not_ parsed as mini-notation, use single quotes (`'`).
+
+## Sequences of events in a cycle
+
+We can play more notes by separating them with spaces:
+
+<MiniRepl client:idle tune={`note("c e g b")`} punchcard />
+
+Here, those four notes are squashed into one cycle, so each note is a quarter second long.
+Try adding or removing notes and notice how the tempo changes!
+
+<MiniRepl client:idle tune={`note("c d e f g a b")`} punchcard />
+
+Note that the overall duration of time does not change, and instead each note length decreases.
+This is a key idea, as it illustrates the 'Cycle' in TidalCycles!
+
+Each space-separated note in this sequence is an _event_.
+The time duration of each event is based on the speed or tempo of the cycle, and how many events are present.
+Taking the two examples above, we have four and eight events respectively, and since they have the same cycle duration, they each have to fit their events inside the same amount of time.
+
+This is perhaps counter-intuitive if you are used to adding notes in a sequencer or piano roll and the overall length increasing.
+But, it will begin to make sense as we go through more elements of mini-notation.
+
+## Multiplication
+
+A sequence can be sped up by multiplying it by a number using the asterisk symbol (`*`):
+
+<MiniRepl client:idle tune={`note("[e5 b4 d5 c5]*2")`} punchcard />
+
+The multiplication by two here means that the sequence will play twice per cycle.
+
+Multiplications can also be decimal (`*2.75`):
+
+<MiniRepl client:idle tune={`note("[e5 b4 d5 c5]*2.75")`} punchcard />
+
+## Division
+
+Contrary to multiplication, division can slow the sequence down by enclosing it in brackets and dividing it by a number (`/2`):
+
+<MiniRepl client:idle tune={`note("[e5 b4 d5 c5]/2")`} punchcard />
+
+The division by two means that the sequence will be played over the course of two cycles.
+You can also use decimal numbers for any tempo you like (`/2.75`).
+
+<MiniRepl client:idle tune={`note("[e5 b4 d5 c5]/2.75")`} punchcard />
+
+## Angle Brackets
+
+Using angle brackets `<>`, we can define the sequence length based on the number of events:
+
+<MiniRepl client:idle tune={`note("<e5 b4 d5 c5>")`} punchcard />
+
+The above snippet is the same as:
+
+<MiniRepl client:idle tune={`note("[e5 b4 d5 c5]/4")`} punchcard />
+
+The advantage of the angle brackets, is that we can add more events without needing to change the number at the end.
+
+<MiniRepl client:idle tune={`note("<e5 b4 d5 c5 e5>")`} punchcard />
+
+<MiniRepl client:idle tune={`note("<e5 b4 d5 c5 e5 b4>")`} punchcard />
+
+This is more similar to traditional music sequencers and piano rolls, where adding a note increases the perceived overall duration.
+We can also play a certain number of notes per cycle by using angle brackets with multiplication:
+
+<MiniRepl client:idle tune={`note("<e5 b4 d5 c5 a4 c5>*8")`} punchcard />
+
+Now we are playing 8 notes per cycle!
+
+## Subdividing time with bracket nesting
+
+To create more interesting rhythms, you can _nest_ or _enclose_ sequences (put sequences inside sequences) with brackets `[]`, like this:
+
+Compare the difference between the following:
+
+<MiniRepl client:idle tune={`note("e5 b4 c5 d5 c5 b4")`} />
+<MiniRepl client:idle tune={`note("e5 [b4 c5] d5 c5 b4")`} />
+<MiniRepl client:idle tune={`note("e5 [b4 c5] d5 [c5 b4]")`} />
+<MiniRepl client:idle tune={`note("e5 [b4 c5] d5 [c5 b4 d5 e5]")`} />
+<MiniRepl client:idle tune={`note("e5 [b4 c5] d5 [c5 b4 [d5 e5]]")`} />
+
+What's going on here? When we nest/enclose multiple events inside brackets (`[]`), their duration becomes the length of one event in the outer sequence.
+
+This is a very simple change to make, but it has profound consequences.
+Remember what we said earlier about how the cycles in tidal stay the same length, and the individual event lengths are divided up in this cycle?
+Well, what this means is that in TidalCycles, not only can you divide time any way you want, and you can also subdivide time any way you want!
+
+## Rests
+
+The "~" represents a rest, and will create silence between other events:
+
+<MiniRepl client:idle tune={`note("[b4 [~ c5] d5 e5]")`} punchcard />
+
+## Parallel / polyphony
+
+Using commas, we can play chords.
+The following are the same:
+
+<MiniRepl client:idle tune={`note("[g3,b3,e4]")`} />
+<MiniRepl client:idle tune={`note("g3,b3,e4")`} punchcard canvasHeight={80} />
+
+But to play multiple chords in a sequence, we have to wrap them in brackets:
+
+<MiniRepl client:idle tune={`note("<[g3,b3,e4] [a3,c3,e4] [b3,d3,f#4] [b3,e4,g4]>*2")`} punchcard />
+
+## Elongation
+
+With the "@" symbol, we can specify temporal "weight" of a sequence child:
+
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]@2 [a3,c3,e4] [b3,d3,f#4]>*2")`} punchcard />
+
+Here, the first chord has a weight of 2, making it twice the length of the other chords. The default weight is 1.
+
+## Replication
+
+Using "!" we can repeat without speeding up:
+
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]!2 [a3,c3,e4] [b3,d3,f#4]>*2")`} punchcard />
+
+## Mini-notation review
+
+To recap what we've learned so far, compare the following patterns:
+
+<MiniRepl client:idle tune={`note("<g3 b3 e4 [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4] [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]/2 [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]*2 [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4] _ [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]@2 [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+<MiniRepl client:idle tune={`note("<[g3,b3,e4]!2 [a3,c3,e4] [b3,d3,f#4]>*2")`} />
+
+## Euclidian rhythms
+
+Using round brackets after an event, we can create rhythmical sub-divisions based on three parameters: `beats`, `segments` and `offset`.
+This algorithm can be found in many different types of music software, and is often referred to as a [Euclidean rhythm](https://en.wikipedia.org/wiki/Euclidean_rhythm) sequencer, after computer scientist Godfriend Toussaint.
+Why is it interesting? Well, consider the following simple example:
+
+<MiniRepl client:idle tune={`s("bd(3,8,0)")`} punchcard canvasHeight={50} />
+
+Sound familiar?
+This is a popular Euclidian rhythm going by various names, such as "Pop Clave".
+These rhythms can be found in all musical cultures, and the Euclidian rhythm algorithm allows us to express them extremely easily.
+Writing this rhythm out in full require describing:
+
+<MiniRepl client:idle tune={`s("bd ~ ~ bd ~ ~ bd ~")`} punchcard canvasHeight={50} />
+
+But using the Euclidian rhythm notation, we only need to express "3 beats over 8 segments, starting on position 1".
+
+This makes it easy to write patterns with interesting rhythmic structures and variations that still sound familiar:
+
+<MiniRepl client:idle tune={`note("e5(2,8) b4(3,8) d5(2,8) c5(3,8)").slow(2)`} punchcard canvasHeight={50} />
+
+Note that since the example above does not use the third `offset` parameter, it can be written simply as `"(3,8)"`.
+
+<MiniRepl client:idle tune={`s("bd(3,8)")`} punchcard canvasHeight={50} />
+
+Let's look at those three parameters in detail.
+
+### Beats
+
+`beats`: the first parameter controls how may beats will be played.
+Compare these:
+
+<MiniRepl client:idle tune={`s("bd(2,8)")`} punchcard canvasHeight={50} />
+<MiniRepl client:idle tune={`s("bd(5,8)")`} punchcard canvasHeight={50} />
+<MiniRepl client:idle tune={`s("bd(7,8)")`} punchcard canvasHeight={50} />
+
+### Segments
+
+`segments`: the second parameter controls the total amount of segments the beats will be distributed over:
+
+<MiniRepl client:idle tune={`s("bd(3,4)")`} punchcard canvasHeight={50} />
+<MiniRepl client:idle tune={`s("bd(3,8)")`} punchcard canvasHeight={50} />
+<MiniRepl client:idle tune={`s("bd(3,13)")`} punchcard canvasHeight={50} />
+
+### Offsets
+
+`offset`: the third (optional) parameter controls the starting position for distributing the beats.
+We need a secondary rhythm to hear the difference:
+
+<MiniRepl client:idle tune={`s("bd(3,8,0), hh cp")`} punchcard />
+<MiniRepl client:idle tune={`s("bd(3,8,3), hh cp")`} punchcard />
+<MiniRepl client:idle tune={`s("bd(3,8,5), hh cp")`} punchcard />
+
+## Mini-notation exercise
+
+The most fun thing about the mini-notation, is that everything you have just learned can be combined in various ways!
+
+Starting with this one `n`, can you make a _pattern string_ that uses every single mini-notation element above?
+
+<MiniRepl client:idle tune={`n("60")`} />
+
+<br />
+
+Next: How do [Samples](/learn/samples) play into this?
+---
+title: Mondo Notation
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Mondo Notation
+
+"Mondo Notation" is a new kind of notation that is similar to [Mini Notation](/learn/mini-notation/), but with enough abilities to make it work as a standalone pattern language.
+Here's an example:
+
+<MiniRepl
+  mondo
+  client:idle
+  tune={`$ note (c2 # euclid <3 6 3> <8 16>) # *2 
+  # s "sine" # add (note [0 <12 24>]*2)
+  # dec(sine # range .2 2) 
+  # room .5
+  # lpf (sine/3 # range 120 400)
+  # lpenv (rand # range .5 4)
+  # lpq (perlin # range 5 12 # * 2)
+  # dist 1 # fm 4 # fmh 5.01 # fmdecay <.1 .2>
+  # postgain .6 # delay .1 # clip 5
+
+$ s [bd bd bd bd] # bank tr909 # clip .5
+
+# ply <1 [1 [2 4]]>
+
+$ s oh\*4 # press # bank tr909 # speed.8
+
+# dec (<.02 .05>\*2 # add (saw/8 # range 0 1))
+
+`}
+/>
+
+## Mondo in the REPL
+
+For now, you can only use mondo in the repl like this:
+
+<MiniRepl client:idle tune={'mondo`s hh*8`'} />
+
+The rest of this site will only use the mondo notation itself.
+In the future, the REPL might get a way to use mondo notation directly.
+
+## Calling Functions
+
+Compared to Mini Notation, the most notable feature of Mondo Notation is the ability to call functions using round brackets:
+
+<MiniRepl mondo client:idle tune={`(s hh*8)`} />
+
+The first element inside the brackets is the function name. In JS, this would look like:
+
+<MiniRepl client:idle tune={`s("hh*8")`} />
+
+The outermost parens are not needed, so we can drop them:
+
+<MiniRepl mondo client:idle tune={`s hh*8`} />
+
+## Mini Notation Features
+
+Besides function calling with round parens, Mondo Notation has a lot in common with Mini Notation:
+
+### Brackets
+
+- `[]` for 1-cycle sequences
+- `<>` for multi-cycle sequences
+- `{}` for stepped sequences (more on that later)
+
+### Infix Operators
+
+- \* => [fast](/learn/time-modifiers/#fast)
+- / => [slow](/learn/time-modifiers/#slow)
+- ! => [extend](/learn/stepwise/#extend)
+- @ => [expand](/learn/stepwise/#expand)
+- % => [pace](/learn/stepwise/#pace)
+- ? => [degradeBy](/learn/random-modifiers/#degradeby) (currently requires right operand)
+- : => tail (creates a list)
+- .. => range (between numbers)
+- , => [stack](/learn/factories/#stack)
+- | => [chooseIn](/learn/random-modifiers/#choose)
+
+### Example
+
+<MiniRepl
+  mondo
+  client:idle
+  tune={`note <
+[e5 [b4 c5] d5 [c5 b4]]
+[a4 [a4 c5] e5 [d5 c5]]
+[b4 [~ c5] d5 e5]
+[c5 a4 a4 ~]
+[[~ d5] [~ f5] a5 [g5 f5]]
+[e5 [~ c5] e5 [d5 c5]]
+[b4 [b4 c5] d5 e5]
+[c5 a4 a4 ~]
+>`}
+/>
+
+## Chaining Functions
+
+Similar to how "." works in javascript (JS), we can chain functions calls with the "#" operator:
+
+<MiniRepl
+  mondo
+  client:idle
+  tune={`n <0 2 4 [3 1] -1>*4 
+ # scale C4:minor 
+ # jux rev 
+ # dec .2
+ # delay .5`}
+/>
+
+Here's the same written in JS:
+
+<MiniRepl
+  client:idle
+  tune={`n("<0 2 4 [3 1] -1>*4")
+ .scale("C4:minor")
+ .jux(rev)
+ .dec(.2)
+ .delay(.5)`}
+/>
+
+### Chaining Functions Locally
+
+A function can be applied to a single element by wrapping it in round parens:
+
+<MiniRepl mondo client:idle tune={`s [bd hh bd (cp # delay .6)] # bank tr909`} />
+
+in this case, `delay .6` will only be applied to `cp`. compare this with the JS version:
+
+<MiniRepl client:idle tune={`s(seq("bd", "hh", "bd", "cp".delay(.6))).bank('tr909')`} />
+
+here we can see how much we can save when there's no boundary between mini notation and function calls!
+
+### Chaining Infix Operators
+
+Infix operators exist as regular functions, so they can be chained as well:
+
+<MiniRepl client:idle mondo tune={`s [bd hh] # bank tr909 # *2`} />
+
+In this case, the \*2 will be applied to the whole pattern.
+
+### Lambda Functions
+
+Some functions in strudel expect a function as input, for example:
+
+<MiniRepl client:idle tune={`n("0 .. 7").scale("C:minor").sometimes(x=>x.dec(.1))`} />
+
+in mondo, the `x=>x.` can be shortened to:
+
+<MiniRepl client:idle mondo tune={`n 0..7 # scale C:minor # sometimes (# dec .1)`} />
+
+chaining works as expected:
+
+<MiniRepl client:idle mondo tune={`n 0..7 # scale C:minor # sometimes (# dec .1 # jux rev)`} />
+
+## Strings
+
+You can use "double quotes" and 'single quotes' to get a string:
+
+<MiniRepl client:idle mondo tune={`n 0..7 # scale 'C minor'`} />
+
+## Multiple Patterns
+
+The `$` sign can be used to separate multiple patterns:
+
+<MiniRepl
+  client:idle
+  mondo
+  tune={`$ s [bd rim [~ bd] rim] # bank tr707
+$ chord <Dm9!3 Db7> # voicing
+  # struct[x ~ ~ x ~ x ~ ~] # delay .5`}
+/>
+
+The `$` sign is an alias for `,` so it will create a stack behind the scenes.
+---
+title: Notes
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Notes
+
+Pitches are an important building block in many musical traditions.
+In Strudel, pitches can be expressed as note names, note numbers or frequencies.
+Here's the same pattern written in three different ways:
+
+- `note`: letter notation, good for those who are familiar with western music theory:
+
+  <MiniRepl client:idle tune={`note("a3 c#4 e4 a4")`} />
+
+- `note`: number notation, good for those who want to use recognisable pitches, but don't care about music theory:
+
+  <MiniRepl client:idle tune={`note("57 61 64 69")`} />
+
+- `freq`: frequency notation, good for those who want to go beyond standardised tuning systems:
+
+  <MiniRepl client:idle tune={`freq("220 275 330 440")`} />
+
+Let's look at those in more detail...
+
+## `note` names
+
+Notes names can be notated with the note letter, followed by the octave number. You can notate flats with `b` and sharps with `#`.
+
+<MiniRepl client:idle tune={`note("a3 c#4 e4 a4")`} />
+
+By the way, you can edit the contents of the player, and press "update" to hear your change!
+You can also press "play" on the next player without needing to stop the last one.
+
+## `note` numbers
+
+If you prefer, you can also use numbers with `note` instead:
+
+<MiniRepl client:idle tune={`note("57 61 64 69")`} />
+
+These numbers are interpreted as so called [MIDI numbers](https://www.inspiredacoustics.com/en/MIDI_note_numbers_and_center_frequencies), where adjacent whole numbers are one 'semitone' apart.
+
+You could also write decimal numbers to get 'microtonal' pitches (in between the black and white piano notes):
+
+<MiniRepl client:idle tune={`note("74.5 75 75.5 76")`} />
+
+## `freq`
+
+To get maximum freedom, you can also use `freq` to directly control the frequency:
+
+<MiniRepl client:idle tune={`freq("220 275 330 440")`} />
+
+## Hearing and frequency
+
+In the above example, we play A3 (220Hz), C#4 natural (275Hz), E4 (330Hz) and A4 (440Hz), mirroring our previous examples.
+
+But can you hear the difference between these individual frequencies?
+
+<MiniRepl client:idle tune={`freq("220 221 223 224")`} />
+
+How about these?
+
+<MiniRepl client:idle tune={`freq("2020 2021 2023 2024")`} />
+
+The higher we go up...
+
+<MiniRepl client:idle tune={`freq("5020 5021 5023 5024")`} />
+
+The less distance we can hear between the frequencies!
+
+<MiniRepl client:idle tune={`freq("10020 10021 10023 10024")`} />
+
+Why is this? [Human hearing operates logarithmically](https://www.audiocheck.net/soundtests_nonlinear.php).
+
+## From notes to sounds
+
+In this page, when we played a pattern of notes like this:
+
+<MiniRepl client:idle tune={`note("a3 c#4 e4 a4")`} />
+
+We heard a simple synthesised sound, in fact we heard a [triangle wave oscillator](https://en.wikipedia.org/wiki/Triangle_wave).
+
+This is the default synthesiser used by Strudel, but how do we then make different sounds in Strudel?
+
+Let's find out in the next page on [Sounds](/learn/sounds).
+
+<br />
+---
+title: Offline
+layout: ../../layouts/MainLayout.astro
+---
+
+# Using Strudel Offline
+
+You can use Strudel even without a network! When you first visit the [Strudel REPL](https://strudel.cc/),
+your browser will download the whole web app including documentation.
+When the download is finished (&lt;1MB), you can visit the website even when offline,
+getting the downloaded website instead of the online one.
+
+When the site gets updated, your browser will download that update on the next online visit.
+When an update is available, the site will refresh after the download is finished.
+
+This works because Strudel is implemented as progessive web app (using [Vite PWA](https://vite-pwa-org.netlify.app/)).
+
+## Samples
+
+While the browser will download the app itself, samples are only downloaded when you're actively using them.
+So to make sure a specific set of samples is available when offline, just use them.
+Also, only samples from these domains will be cached for offline use:
+
+- `https://raw.githubusercontent.com/*` for samples uploaded to github
+- `https://freesound.org/*` / `https://cdn.freesound.org/*` for freesound
+- `https://shabda.ndre.gr/.*` for shabda
+
+## Inspecting / Clearing Cache
+
+You can view all cached files in your browser.
+
+### Firefox
+
+- Open the Developer Tools (`Tools > Web Developer > Web Developer Tools`)
+- go to `Storage` tab and expand `Cache Storage > https://strudel.cc`.
+- or go to the `Application` tab and view the latest updates in `Service Workers`
+
+### Chromium based Browsers
+
+- Open Developer Tools (`Right Click > Inspect`)
+- go to the `Application` tab
+- view downloaded files under `Cache > Cache Storage`
+- view the latest updates in `Service Workers`
+
+## Strudel Standalone App
+
+You can also install Strudel as a standalone app on most devices.
+A standalone app has its own desktop / homescreen icon and launches in a separate window,
+without the browser ui.
+
+<figure>
+  ![Strudel on MacOS](/pwa/strudel-macos.png)
+  <figcaption>Strudel on MacOS</figcaption>
+</figure>
+
+### Desktop
+
+With a chromium based browser:
+
+1. go to the [Strudel REPL](https://strudel.cc).
+2. on the right of the adress bar, click `install Strudel REPL`
+3. the REPL should now run as a standalone chromium app
+
+Without a chromium based browser, you can use [nativefier](https://github.com/nativefier/nativefier) to generate a desktop app:
+
+1. make sure you have NodeJS installed
+2. run `npx nativefier strudel.cc`
+
+<figure>
+  ![Strudel on Linux](/pwa/strudel-linux.png)
+  <figcaption>Strudel on Linux</figcaption>
+</figure>
+
+### iOS
+
+1. open to the [Strudel REPL](https://strudel.cc/) in safari
+2. press the share icon and tab `Add to homescreen`
+3. You should now have a strudel app icon that opens the repl in full screen
+
+### Android
+
+1. open to the [Strudel REPL](https://strudel.cc/)
+2. Tab the install button at the bottom
+
+Ok, what are [Patterns](/technical-manual/patterns) all about?
+---
+title: Random Modifiers
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Random Modifiers
+
+These methods add random behavior to your Patterns.
+
+## choose
+
+<JsDoc client:idle name="choose" h={0} />
+
+## wchoose
+
+<JsDoc client:idle name="wchoose" h={0} />
+
+## chooseCycles
+
+<JsDoc client:idle name="chooseCycles" h={0} />
+
+## wchooseCycles
+
+<JsDoc client:idle name="wchooseCycles" h={0} />
+
+## degradeBy
+
+<JsDoc client:idle name="Pattern.degradeBy" h={0} />
+
+## degrade
+
+<JsDoc client:idle name="Pattern.degrade" h={0} />
+
+## undegradeBy
+
+<JsDoc client:idle name="Pattern.undegradeBy" h={0} />
+
+## undegrade
+
+<JsDoc client:idle name="Pattern.undegrade" h={0} />
+
+## sometimesBy
+
+<JsDoc client:idle name="Pattern.sometimesBy" h={0} />
+
+## sometimes
+
+<JsDoc client:idle name="Pattern.sometimes" h={0} />
+
+## someCyclesBy
+
+<JsDoc client:idle name="Pattern.someCyclesBy" h={0} />
+
+## someCycles
+
+<JsDoc client:idle name="Pattern.someCycles" h={0} />
+
+## often
+
+<JsDoc client:idle name="Pattern.often" h={0} />
+
+## rarely
+
+<JsDoc client:idle name="Pattern.rarely" h={0} />
+
+## almostNever
+
+<JsDoc client:idle name="Pattern.almostNever" h={0} />
+
+## almostAlways
+
+<JsDoc client:idle name="Pattern.almostAlways" h={0} />
+
+## never
+
+<JsDoc client:idle name="Pattern.never" h={0} />
+
+## always
+
+<JsDoc client:idle name="Pattern.always" h={0} />
+
+Next up: [Conditional Modifiers](/learn/conditional-modifiers)
+---
+title: Samples
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Samples
+
+Samples are the most common way to make sound with tidal and strudel.
+A sample is a (commonly short) piece of audio that is used as a basis for sound generation, undergoing various transformations.
+Music that is based on samples can be thought of as a collage of sound. [Read more about Sampling](<https://en.wikipedia.org/wiki/Sampling_(music)>)
+
+Strudel allows loading samples in the form of audio files of various formats (wav, mp3, ogg) from any publicly available URL.
+
+# Default Samples
+
+By default, strudel comes with a built-in "sample map", providing a solid base to play with.
+
+<MiniRepl client:idle tune={`s("bd sd [~ bd] sd,hh*16, misc")`} />
+
+Here, we are using the `s` function to play back different default samples (`bd`, `sd`, `hh` and `misc`) to get a drum beat.
+
+For drum sounds, strudel uses the comprehensive [tidal-drum-machines](https://github.com/ritchse/tidal-drum-machines) library, with the following naming convention:
+
+| Drum                 | Abbreviation |
+| -------------------- | ------------ |
+| Bass drum, Kick drum | bd           |
+| Snare drum           | sd           |
+| Rimshot              | rim          |
+| Clap                 | cp           |
+| Closed hi-hat        | hh           |
+| Open hi-hat          | oh           |
+| Crash                | cr           |
+| Ride                 | rd           |
+| High tom             | ht           |
+| Medium tom           | mt           |
+| Low tom              | lt           |
+
+<img src="/img/drumset.png" />
+
+<a class="text-right text-xs" href="https://de.wikipedia.org/wiki/Schlagzeug#/media/Datei:Drum_set.svg" target="_blank">
+  original von Pbroks13
+</a>
+
+More percussive sounds:
+
+| Source                              | Abbreviation |
+| ----------------------------------- | ------------ |
+| Shakers (and maracas, cabasas, etc) | sh           |
+| Cowbell                             | cb           |
+| Tambourine                          | tb           |
+| Other percussions                   | perc         |
+| Miscellaneous samples               | misc         |
+| Effects                             | fx           |
+
+Furthermore, strudel also loads instrument samples from [VCSL](https://github.com/sgossner/VCSL) by default.
+
+To see which sample names are available, open the `sounds` tab in the [REPL](https://strudel.cc/).
+
+Note that only the sample maps (mapping names to URLs) are loaded initially, while the audio samples themselves are not loaded until they are actually played.
+This behaviour of loading things only when they are needed is also called `lazy loading`.
+While it saves resources, it can also lead to sounds not being audible the first time they are triggered, because the sound is still loading.
+[This might be fixed in the future](https://codeberg.org/uzu/strudel/issues/187)
+
+# Sound Banks
+
+If we open the `sounds` tab and then `drum-machines`, we can see that the drum samples are all prefixed with drum machine names: `RolandTR808_bd`, `RolandTR808_sd`, `RolandTR808_hh` etc..
+
+We _could_ use them like this:
+
+<MiniRepl client:idle tune={`s("RolandTR808_bd RolandTR808_sd,RolandTR808_hh*16")`} />
+
+... but thats obviously a bit much to write. Using the `bank` function, we can shorten this to:
+
+<MiniRepl client:idle tune={`s("bd sd,hh*16").bank("RolandTR808")`} />
+
+You could even pattern the bank to switch between different drum machines:
+
+<MiniRepl client:idle tune={`s("bd sd,hh*16").bank("<RolandTR808 RolandTR909>")`} />
+
+Behind the scenes, `bank` will just prepend the drum machine name to the sample name with `_` to get the full name.
+This of course only works because the name after `_` (`bd`, `sd` etc..) is standardized.
+Also note that some banks won't have samples for all sounds!
+
+# Selecting Sounds
+
+If we open the `sounds` tab again, followed by tab `drum machines`, there is also a number behind each name, indicating how many individual samples are available.
+For example `RolandTR909_hh(4)` means there are 4 samples of a TR909 hihat available.
+By default, `s` will play the first sample, but we can select the other ones using `n`, starting from 0:
+
+<MiniRepl client:idle tune={`s("hh*8").bank("RolandTR909").n("0 1 2 3")`} />
+
+Numbers that are too high will just wrap around to the beginning
+
+<MiniRepl client:idle tune={`s("hh*8").bank("RolandTR909").n("0 1 2 3 4 5 6 7")`} />
+
+Here, 0-3 will play the same sounds as 4-7, because `RolandTR909_hh` only has 4 sounds.
+
+Selecting sounds also works inside the mini notation, using "`:`" like this:
+
+<MiniRepl
+  client:idle
+  tune={`s("bd*4,hh:0 hh:1 hh:2 hh:3 hh:4 hh:5 hh:6 hh:7")
+.bank("RolandTR909")`}
+/>
+
+# Loading Custom Samples
+
+You can load a non-standard sample map using the `samples` function.
+
+## Loading samples from file URLs
+
+In this example we assign names `bassdrum`, `hihat` and `snaredrum` to specific audio files on a server:
+
+<MiniRepl
+  client:idle
+  tune={`samples({
+  bassdrum: 'bd/BT0AADA.wav',
+  hihat: 'hh27/000_hh27closedhh.wav',
+  snaredrum: ['sd/rytm-01-classic.wav', 'sd/rytm-00-hard.wav'],
+}, 'https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/');
+ 
+s("bassdrum snaredrum:0 bassdrum snaredrum:1, hihat*16")`}
+/>
+
+You can freely choose any combination of letters for each sample name. It is even possible to override the default sounds.
+The names you pick will be made available in the `s` function.
+Make sure that the URL and each sample path form a correct URL!
+
+In the above example, `bassdrum` will load:
+
+```
+https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/bd/BT0AADA.wav
+|----------------------base path --------------------------------|--sample path-|
+```
+
+Note that we can either load a single file, like for `bassdrum` and `hihat`, or a list of files like for `snaredrum`!
+As soon as you run the code, your chosen sample names will be listed in `sounds` -> `user`.
+
+## Loading Samples from a strudel.json file
+
+The above way to load samples might be tedious to write out / copy paste each time you write a new pattern.
+To avoid that, you can simply pass a URL to a `strudel.json` file somewhere on the internet:
+
+<MiniRepl
+  client:idle
+  tune={`samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
+s("bd sd bd sd,hh*16")`}
+/>
+
+The file is expected to define a sample map using JSON, in the same format as described above.
+Additionally, the base path can be defined with the `_base` key.
+The last section could be written as:
+
+```json
+{
+  "_base": "https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/",
+  "bassdrum": "bd/BT0AADA.wav",
+  "snaredrum": "sd/rytm-01-classic.wav",
+  "hihat": "hh27/000_hh27closedhh.wav"
+}
+```
+
+Please note that browsers will often cache `strudel.json` on first load, and keep using the cached
+version even if the orginal has been updated. If this bites you (for example while developing a new
+sample pack), you can force the browser to download a new copy by i.e. changing capitalization of one
+character in the URL, or adding a URL attribute, such as:
+
+```javascript
+samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json?version=2');
+```
+
+that gets ignored by GitHub (but changes the URL, forcing the browser to reload every time we increase
+the version number).
+
+It is also possible, of course, to just remove it from cache (deleting cache in browser Privacy settings,
+or from the dev console if you're technically minded, or by using a cache deleting extension).
+
+## Github Shortcut
+
+Because loading samples from github is common, there is a shortcut:
+
+<MiniRepl
+  client:idle
+  tune={`samples('github:tidalcycles/dirt-samples')
+s("bd sd bd sd,hh*16")`}
+/>
+
+The format is `samples('github:<user>/<repo>/<branch>')`. If you omit `branch` (like above), the `main` branch will be used.
+It assumes a `strudel.json` file to be present at the root of the repository:
+
+```
+https://raw.githubusercontent.com/<user>/<repo>/<branch>/strudel.json
+```
+
+## From Disk via "Import Sounds Folder"
+
+If you don't want to upload your samples to the internet, you can also load them from your local disk.
+Go to the `sounds` tab in the REPL and open the `import-sounds` tab below the search bar.
+Press the "import sounds folder" button and select a folder that contains audio files.
+The folder you select can also contain subfolders with audio files.
+Example:
+
+```
+└─ samples
+   ├─ swoop
+   │  ├─ swoopshort.wav
+   │  ├─ swooplong.wav
+   │  └─ swooptight.wav
+   └─ smash
+      ├─ smashhigh.wav
+      ├─ smashlow.wav
+      └─ smashmiddle.wav
+```
+
+In the above example the folder `samples` contains 2 subfolders `swoop` and `smash`, which contain audio files.
+If you select that `samples` folder, the `user` tab (next to the `import-sounds` tab) will then contain 2 new sounds: `swoop(3) smash(3)`
+The individual samples can the be played normally like `s("swoop:0 swoop:1 smash:2")`.
+The samples within each sound use zero-based indexing in alphabetical order.
+
+## From Disk via @strudel/sampler
+
+Instead of loading your samples into your browser with the "import sounds folder" button, you can also serve the samples from a local file server.
+The easiest way to do this is using [@strudel/sampler](https://www.npmjs.com/package/@strudel/sampler):
+
+```sh
+cd samples
+npx @strudel/sampler
+```
+
+Then you can load it via:
+
+<MiniRepl
+  client:idle
+  tune={`samples('http://localhost:5432/');
+ 
+n("<0 1 2>").s("swoop smash")`}
+/>
+
+The handy thing about `@strudel/sampler` is that it auto-generates the `strudel.json` file based on your folder structure.
+You can see what it generated by going to `http://localhost:5432` with your browser.
+
+Note: You need [NodeJS](https://nodejs.org/) installed on your system for this to work.
+
+## Specifying Pitch
+
+To make sure your samples are in tune when playing them with `note`, you can specify a base pitch like this:
+
+<MiniRepl
+  client:idle
+  tune={`samples({
+  'gtr': 'gtr/0001_cleanC.wav',
+  'moog': { 'g3': 'moog/005_Mighty%20Moog%20G3.wav' },
+}, 'github:tidalcycles/dirt-samples');
+note("g3 [bb3 c4] <g4 f4 eb4 f3>@2").s("gtr,moog").clip(1)
+  .gain(.5)`}
+/>
+
+We can also declare different samples for different regions of the keyboard:
+
+<MiniRepl
+  client:idle
+  tune={`setcpm(60)
+samples({
+  'moog': {
+    'g2': 'moog/004_Mighty%20Moog%20G2.wav',
+    'g3': 'moog/005_Mighty%20Moog%20G3.wav',
+    'g4': 'moog/006_Mighty%20Moog%20G4.wav',
+  }}, 'github:tidalcycles/dirt-samples')
+
+note("g2!2 <bb2 c3>!2, <c4@3 [<eb4 bb3> g4 f4]>")
+.s('moog').clip(1)
+.gain(.5)`}
+/>
+
+The sampler will always pick the closest matching sample for the current note!
+
+Note that this notation for pitched sounds also works inside a `strudel.json` file.
+
+## Shabda
+
+If you don't want to select samples by hand, there is also the wonderful tool called [shabda](https://shabda.ndre.gr/).
+With it, you can enter any sample name(s) to query from [freesound.org](https://freesound.org/). Example:
+
+<MiniRepl
+  client:idle
+  tune={`samples('shabda:bass:4,hihat:4,rimshot:2')
+
+$: n("0 1 2 3 0 1 2 3").s('bass')
+$: n("0 1*2 2 3*2").s('hihat').clip(1)
+$: n("~ 0 ~ 1 ~ 0 0 1").s('rimshot')`}
+/>
+
+You can also generate artificial voice samples with any text, in multiple languages.
+Note that the language code and the gender parameters are optional and default to `en-GB` and `f`
+
+<MiniRepl
+  client:idle
+  tune={`samples('shabda/speech:the_drum,forever')
+samples('shabda/speech/fr-FR/m:magnifique')
+
+$: s("the_drum*2").chop(16).speed(rand.range(0.85,1.1))
+$: s("forever magnifique").slow(4).late(0.125)`}
+/>
+
+# Sampler Effects
+
+Sampler effects are functions that can be used to change the behaviour of sample playback.
+
+### begin
+
+<JsDoc client:idle name="Pattern.begin" h={0} />
+
+### end
+
+<JsDoc client:idle name="Pattern.end" h={0} />
+
+### loop
+
+<JsDoc client:idle name="loop" h={0} />
+
+### loopBegin
+
+<JsDoc client:idle name="loopBegin" h={0} />
+
+### loopEnd
+
+<JsDoc client:idle name="loopEnd" h={0} />
+
+### cut
+
+<JsDoc client:idle name="cut" h={0} />
+
+### clip
+
+<JsDoc client:idle name="clip" h={0} />
+
+### loopAt
+
+<JsDoc client:idle name="Pattern.loopAt" h={0} />
+
+### fit
+
+<JsDoc client:idle name="fit" h={0} />
+
+### chop
+
+<JsDoc client:idle name="Pattern.chop" h={0} />
+
+### striate
+
+<JsDoc client:idle name="Pattern.striate" h={0} />
+
+### slice
+
+<JsDoc client:idle name="Pattern.slice" h={0} />
+
+### splice
+
+<JsDoc client:idle name="splice" h={0} />
+
+### speed
+
+<JsDoc client:idle name="speed" h={0} />
+
+After samples, let's see what [Synths](/learn/synths) afford us.
+---
+title: Signals
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Continuous Signals
+
+Signals are patterns with continuous values, meaning they have theoretically infinite steps.
+They can provide streams of numbers that can be sampled at discrete points in time.
+
+## saw
+
+<JsDoc client:idle name="saw" h={0} />
+
+## sine
+
+<JsDoc client:idle name="sine" h={0} />
+
+## cosine
+
+<JsDoc client:idle name="cosine" h={0} />
+
+## tri
+
+<JsDoc client:idle name="tri" h={0} />
+
+## square
+
+<JsDoc client:idle name="square" h={0} />
+
+## rand
+
+<JsDoc client:idle name="rand" h={0} />
+
+## Ranges from -1 to 1
+
+There is also `saw2`, `sine2`, `cosine2`, `tri2`, `square2` and `rand2` which have a range from -1 to 1!
+
+## perlin
+
+<JsDoc client:idle name="perlin" h={0} />
+
+## irand
+
+<JsDoc client:idle name="irand" h={0} />
+
+## brand
+
+<JsDoc client:idle name="brand" h={0} />
+
+## brandBy
+
+<JsDoc client:idle name="brandBy" h={0} />
+
+## mouseX
+
+<JsDoc client:idle name="mousex" h={0} />
+
+## mouseY
+
+<JsDoc client:idle name="mousey" h={0} />
+
+Next up: [Random Modifiers](/learn/random-modifiers)
+---
+title: Sounds
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Sounds
+
+We can play sounds with `s`, in two different ways:
+
+- `s` can trigger audio samples, where a sound file is loaded in the background and played back:
+  <MiniRepl client:idle tune={`s("bd hh sd hh")`} />
+- `s` can trigger audio synthesisers, which are synthesised in real-time using code also running in the background:
+  <MiniRepl client:idle tune={`s("sawtooth square triangle sine")`} />
+
+You can learn more about both of these approaches in the pages [Synths](/learn/synths) and [Samples](/learn/samples).
+
+# Combining notes and sounds
+
+In both of the above cases, we are no longer directly controlling the `note`/`freq` of the sound heard via `s`, as we were in the [Notes](/workshop/first-notes/) page.
+
+So how can we both control the sound and the pitch? We can _combine_ `note`/`freq` with `s` to change the sound of our pitches:
+
+<MiniRepl client:idle tune={`note("a3 c#4 e4 a4").s("sawtooth")`} />
+
+<MiniRepl client:idle tune={`note("57 61 64 69").s("sine")`} />
+
+<MiniRepl client:idle tune={`freq("220 275 330 440").s("triangle")`} />
+
+The last example will actually sound the same with or without `s`, because `triangle` is the default value for `s`.
+
+What about combining different notes with different sounds at the same time?
+
+<MiniRepl client:idle tune={`freq("220 275 330 440 550").s("triangle sawtooth sine")`} />
+
+Hmm, something interesting is going on there, related to there being five notes and three sounds.
+
+Let's now take a step back and think about the Strudel [Code](/learn/code/) we've been hearing so far.
+---
+title: Stepwise patterning
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Stepwise patterning (experimental)
+
+This is a developing area of strudel, and behaviour might change or be renamed in future versions. Feedback and ideas are welcome!
+
+## Introduction
+
+Usually in strudel, the only reference point for most pattern transformations is the _cycle_. Now it is possible to also work with _steps_, via a growing range of functions.
+
+For example usually when you `fastcat` two patterns together, the cycles will be squashed into half a cycle each:
+
+<MiniRepl client:idle tune={`fastcat("bd hh hh", "bd hh hh cp hh").sound()`} />
+
+With the new stepwise `stepcat` function, the steps of the two patterns will be evenly distributed across the cycle:
+
+<MiniRepl client:idle tune={`stepcat("bd hh hh", "bd hh hh cp hh").sound()`} />
+
+By default, steps are counted according to the 'top level' in mini-notation. For example `"a [b c] d e"` has five events in it per cycle, but is counted as four steps, where `[b c]` is counted as a single step.
+
+However, you can mark a different metrical level to count steps relative to, using a `^` at the start of a sub-pattern. If we do this to the subpattern in our example: `"a [^b c] d e"`, then the pattern is now counted as having _eight_ steps. This is because 'b' and 'c' are each counted as single steps, and the events in the pattern are twice as long, and so counted as two steps each.
+
+## Pacing the steps
+
+Some stepwise functions don't appear to do very much on their own, for example these two examples of the `expand` function sound exactly the same despite being expanded by different amounts:
+
+<MiniRepl client:idle tune={`"c a f e".expand(2).note().sound("folkharp")`} />
+
+<MiniRepl client:idle tune={`"c a f e".expand(4).note().sound("folkharp")`} />
+
+The number of steps per cycle is being changed behind the scenes, but on its own, that doesn't do anything. You will hear a difference however, once you use another stepwise function with it, for example `stepcat`:
+
+<MiniRepl
+  client:idle
+  tune={`stepcat("c a f e".expand(2), "g d").note()
+  .sound("folkharp")`}
+/>
+
+<MiniRepl
+  client:idle
+  tune={`stepcat("c a f e".expand(4), "g d").note()
+  .sound("folkharp")`}
+/>
+
+You should be able to hear that `expand` increases the duration of the steps of the first subpattern, proportionally to the second one.
+
+You can also change the speed of a pattern to match a given number of steps per cycle, with the `pace` function:
+
+<MiniRepl
+  client:idle
+  tune={`stepcat("c a f e".expand(2), "g d").note()
+  .sound("folkharp")
+  .pace(8)`}
+/>
+
+<MiniRepl
+  client:idle
+  tune={`stepcat("c a f e".expand(4), "g d").note()
+  .sound("folkharp")
+  .pace(8)`}
+/>
+
+The first example has ten steps, and the second example has 18 steps, but are then both played a rate of 8 steps per cycle.
+
+The argument to `expand` can also be patterned, and will be treated in a stepwise fashion. This means that the patterns from the changing values in the argument will be `stepcat`ted together:
+
+<MiniRepl client:idle tune={`note("c a f e").sound("folkharp").expand("3 2 1 1 2 3")`} />
+
+This results in a dense pattern, because the different expanded versions are squashed into a single cycle. `pace` is again handy here for slowing down the pattern to a particular number of steps per cycle:
+
+<MiniRepl client:idle tune={`note("c a f e").sound("folkharp").expand("3 2 1 1 2 3").pace(8)`} />
+
+Earlier versions of many of these functions had `s_` prefixes, and the `pace` function was previously known as `steps`. These still exist as aliases, but may have changed behaviour and will soon be removed. Please update your patterns!
+
+## Stepwise functions
+
+### pace
+
+<JsDoc client:idle name="pace" h={0} />
+
+### stepcat
+
+<JsDoc client:idle name="stepcat" h={0} />
+
+### stepalt
+
+<JsDoc client:idle name="stepalt" h={0} />
+
+### expand
+
+<JsDoc client:idle name="expand" h={0} />
+
+### contract
+
+<JsDoc client:idle name="contract" h={0} />
+
+### extend
+
+<JsDoc client:idle name="extend" h={0} />
+
+### take
+
+<JsDoc client:idle name="take" h={0} />
+
+### drop
+
+<JsDoc client:idle name="drop" h={0} />
+
+### polymeter
+
+<JsDoc client:idle name="polymeter" h={0} />
+
+### shrink
+
+<JsDoc client:idle name="shrink" h={0} />
+
+### grow
+
+<JsDoc client:idle name="grow" h={0} />
+
+### tour
+
+<JsDoc client:idle name="tour" h={0} />
+
+### zip
+
+<JsDoc client:idle name="zip" h={0} />
+---
+title: Strudel vs Tidal
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Comparing Strudel and Tidal
+
+This page is dedicated to exisiting tidal users, giving an overview of all the differences between Strudel and Tidal.
+
+## Language
+
+Strudel is written in JavaScript, while Tidal is written in Haskell.
+
+### Example
+
+This difference is most obvious when looking at the syntax:
+
+```haskell
+iter 4 $ every 3 (||+ n "10 20") $ (n "0 1 3") # s "triangle" # crush 4
+```
+
+One _could_ express that pattern to Strudel like so:
+
+```
+iter(4, every(3, add.squeeze("10 20"), n("0 1 3").s("triangle").crush(4)))
+```
+
+- The `$` operator does not exist, so the `iter` function has to wrap everything in parens.
+- Custom operators like `||+` are explicit function calls, `add.squeeze` in this case
+- The `#` operator is replaced with a chained function call `# crush 4` => `.crush(4)`
+
+Unlike Haskell, JavaScript lacks the ability to define custom infix
+operators, or change the meaning of existing ones.
+
+Before you discard Strudel as an unwieldy paren monster, look at this alternative way to write the above:
+
+```
+n("0 1 3").every(3, add.squeeze("10 20")).iter(4).s("triangle").crush(4)
+```
+
+By reordering calls, the parens are much less nested.
+As a general rule by thumb, you could say that everything Tidal does with `$` is reversed in Strudel:
+
+`iter 4 $ every 3 (||+ n "10 20") $ (n "0 1 3")`
+
+becomes
+
+`n("0 1 3").every(3, add.squeeze("10 20")).iter(4)`
+
+Simply put, `foo x $ bar x` becomes `bar(x).foo(x)`.
+
+### Operators
+
+The [custom operators of tidal](https://tidalcycles.org/docs/reference/pattern_structure/#all-the-operators) are normal functions in strudel:
+
+| function    | tidal  | strudel |
+| ----------- | ------ | ------- |
+| add         | \|+ n  | .add(n) |
+| subtract    | \|- n  | .sub(n) |
+| multiply    | \|\* n | .mul(n) |
+| divide      | \|\/ n | .div(n) |
+| modulo      | \|\% n | .mod(n) |
+| left values | \|\< n | .set(n) |
+
+The above list only displays the operators taking the structure comes from the `left`.
+For each of those, a `right` and `both` variant also exists.
+As this directional thinking only works with code, strudel calls these `in` / `out` / `mix`:
+
+| direction | tidal   | strudel     |
+| --------- | ------- | ----------- |
+| left      | \|+ n   | .add.in(n)  |
+| right     | +\| n   | .add.out(n) |
+| both      | \|+\| n | .add.mix(n) |
+
+Instead of `+` / `add`, you can use any of the available operators of the first list.
+
+## Function Compatibility
+
+[This issue](https://codeberg.org/uzu/strudel/issues/31) tracks which Tidal functions are implemented in Strudel.
+The list might not be 100% up to date and probably also misses some functions completely..
+Feel encouraged to search the source code for a function you're looking for.
+If you find a function that's not on the list, please tell!
+
+## Control Params
+
+As seen in the example, the `#` operator (shorthand for `|>`) is also just a function call in strudel.
+So `note "c5" # s "gtr"` becomes `note("c5").s('gtr')`.
+
+[This file](https://codeberg.org/uzu/strudel/src/branch/main/packages/core/controls.mjs) lists all available control params.
+Note that not all of those work in the Webaudio Output of Strudel.
+If you find a tidal control that's not on the list, please tell!
+
+## Sound
+
+Tidal is commonly paired with Superdirt / Supercollider for sound generation.
+While Strudel also has a way of [communicating with Superdirt](/learn/input-output/),
+it aims to provide a standalone live coding environment that runs entirely in the browser.
+
+### Audio Effects
+
+Many of SuperDirt's effects have been reimplemented in Strudel, using the Web Audio API.
+You can find a [list of available effects here](/learn/effects/).
+
+### Sampler
+
+Strudel's sampler supports [a subset](/learn/samples) of Superdirt's sampler.
+Also, samples are always loaded from a URL rather than from the disk, although [that might be possible in the future](https://codeberg.org/uzu/strudel/issues/118).
+
+## Evaluation
+
+The Strudel REPL does not support [block based evaluation](https://codeberg.org/uzu/strudel/issues/34) yet.
+You can use labeled statements and `_` to mute:
+
+<MiniRepl
+  client:visible
+tune={`$: n("[0 .. 8]*8/9").scale("C:minor:pentatonic")
+
+\_$: s("bd\*4").bank('RolandTR909')`}
+/>
+
+## Tempo
+
+Strudels tempo is 1 cycle per second, while tidal defaults to `0.5625`.
+You can get the same tempo as tidal with:
+
+```
+note("c a f e").fast(.5625);
+```
+
+Next up: the [REPL](/technical-manual/repl)
+---
+title: Synths
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Synths
+
+In addition to the sampling engine, strudel comes with a synthesizer to create sounds on the fly.
+
+## Basic Waveforms
+
+The basic waveforms are `sine`, `sawtooth`, `square` and `triangle`, which can be selected via `sound` (or `s`):
+
+<MiniRepl
+  client:idle
+  tune={`note("c2 <eb2 <g2 g1>>".fast(2))
+.sound("<sawtooth square triangle sine>")
+._scope()`}
+/>
+
+If you don't set a `sound` but a `note` the default value for `sound` is `triangle`!
+
+## Noise
+
+You can also use noise as a source by setting the waveform to: `white`, `pink` or `brown`. These are different
+flavours of noise, here written from hard to soft.
+
+<MiniRepl client:idle tune={`sound("<white pink brown>")._scope()`} />
+
+Here's a more musical example of how to use noise for hihats:
+
+<MiniRepl
+  client:idle
+  tune={`sound("bd*2,<white pink brown>*8")
+.decay(.04).sustain(0)._scope()`}
+/>
+
+Some amount of pink noise can also be added to any oscillator by using the `noise` paremeter:
+
+<MiniRepl client:idle tune={`note("c3").noise("<0.1 0.25 0.5>")._scope()`} />
+
+You can also use the `crackle` type to play some subtle noise crackles. You can control noise amount by using the `density` parameter:
+
+<MiniRepl client:idle tune={`s("crackle*4").density("<0.01 0.04 0.2 0.5>".slow(2))._scope()`} />
+
+### Additive Synthesis
+
+To tame the harsh sound of the basic waveforms, we can set the `n` control to limit the overtones of the waveform:
+
+<MiniRepl
+  client:idle
+  tune={`note("c2 <eb2 <g2 g1>>".fast(2))
+.sound("sawtooth")
+.n("<32 16 8 4>")
+._scope()`}
+/>
+
+When the `n` control is used on a basic waveform, it defines the number of harmonic partials the sound is getting.
+You can also set `n` directly in mini notation with `sound`:
+
+<MiniRepl
+  client:idle
+  tune={`note("c2 <eb2 <g2 g1>>".fast(2))
+.sound("sawtooth:<32 16 8 4>")
+._scope()`}
+/>
+
+Note for tidal users: `n` in tidal is synonymous to `note` for synths only.
+In strudel, this is not the case, where `n` will always change timbre, be it though different samples or different waveforms.
+
+## Vibrato
+
+### vib
+
+<JsDoc client:idle name="vib" h={0} />
+
+### vibmod
+
+<JsDoc client:idle name="vibmod" h={0} />
+
+## FM Synthesis
+
+FM Synthesis is a technique that changes the frequency of a basic waveform rapidly to alter the timbre.
+
+You can use fm with any of the above waveforms, although the below examples all use the default triangle wave.
+
+### fm
+
+<JsDoc client:idle name="fm" h={0} />
+
+### fmh
+
+<JsDoc client:idle name="fmh" h={0} />
+
+### fmattack
+
+<JsDoc client:idle name="fmattack" h={0} />
+
+### fmdecay
+
+<JsDoc client:idle name="fmdecay" h={0} />
+
+### fmsustain
+
+<JsDoc client:idle name="fmsustain" h={0} />
+
+### fmenv
+
+<JsDoc client:idle name="fmenv" h={0} />
+
+## Wavetable Synthesis
+
+Strudel can also use the sampler to load custom waveforms as a replacement of the default waveforms used by WebAudio for the base synth. A default set of more than 1000 wavetables is accessible by default (coming from the [AKWF](https://www.adventurekid.se/akrt/waveforms/adventure-kid-waveforms/) set). You can also import/use your own. A wavetable is a one-cycle waveform, which is then repeated to create a sound at the desired frequency. It is a classic but very effective synthesis technique.
+
+Any sample preceded by the `wt_` prefix will be loaded as a wavetable. This means that the `loop` argument will be set to `1` by default. You can scan over the wavetable by using `loopBegin` and `loopEnd` as well.
+
+<MiniRepl
+  client:idle
+  tune={`samples('bubo:waveforms');
+note("<[g3,b3,e4]!2 [a3,c3,e4] [b3,d3,f#4]>")
+.n("<1 2 3 4 5 6 7 8 9 10>/2").room(0.5).size(0.9)
+.s('wt_flute').velocity(0.25).often(n => n.ply(2))
+.release(0.125).decay("<0.1 0.25 0.3 0.4>").sustain(0)
+.cutoff(2000).cutoff("<1000 2000 4000>").fast(4)
+._scope()
+`}
+/>
+
+## ZZFX
+
+The "Zuper Zmall Zound Zynth" [ZZFX](https://github.com/KilledByAPixel/ZzFX) is also integrated in strudel.
+Developed by [Frank Force](https://frankforce.com/), it is a synth and FX engine originally intended to be used for size coding games.
+
+It has 20 parameters in total, here is a snippet that uses all:
+
+<MiniRepl
+  client:idle
+  tune={`note("c2 eb2 f2 g2") // also supports freq
+  .s("{z_sawtooth z_tan z_noise z_sine z_square}%4")
+  .zrand(0) // randomization
+  // zzfx envelope
+  .attack(0.001)
+  .decay(0.1)
+  .sustain(.8)
+  .release(.1)
+  // special zzfx params
+  .curve(1) // waveshape 1-3
+  .slide(0) // +/- pitch slide
+  .deltaSlide(0) // +/- pitch slide (?)
+  .noise(0) // make it dirty
+  .zmod(0) // fm speed
+  .zcrush(0) // bit crush 0 - 1
+  .zdelay(0) // simple delay
+  .pitchJump(0) // +/- pitch change after pitchJumpTime
+  .pitchJumpTime(0) // >0 time after pitchJump is applied
+  .lfo(0) // >0 resets slide + pitchJump + sets tremolo speed
+  .tremolo(0) // 0-1 lfo volume modulation amount
+  //.duration(.2) // overwrite strudel event duration
+  //.gain(1) // change volume
+  ._scope() // vizualise waveform (not zzfx related)
+`}
+/>
+
+Note that you can also combine zzfx with all the other audio fx (next chapter).
+
+Next up: [Audio Effects](/learn/effects)...
+---
+title: Time Modifiers
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Time Modifiers
+
+The following functions modify a pattern temporal structure in some way.
+Some of these have equivalent operators in the Mini Notation:
+
+| function               | mini         |
+| ---------------------- | ------------ |
+| `"x".slow(2)`          | `"x/2"`      |
+| `"x".fast(2)`          | `"x*2"`      |
+| `"x".euclid(3,8)`      | `"x(3,8)"`   |
+| `"x".euclidRot(3,8,1)` | `"x(3,8,1)"` |
+
+## slow
+
+<JsDoc client:idle name="Pattern.slow" h={0} />
+
+## fast
+
+<JsDoc client:idle name="Pattern.fast" h={0} />
+
+## early
+
+<JsDoc client:idle name="Pattern.early" h={0} />
+
+## late
+
+<JsDoc client:idle name="Pattern.late" h={0} />
+
+## clip / legato
+
+<JsDoc client:idle name="clip" h={0} />
+
+## euclid
+
+<JsDoc client:idle name="Pattern.euclid" h={0} />
+
+### euclidRot
+
+<JsDoc client:idle name="Pattern.euclidRot" h={0} />
+
+### euclidLegato
+
+<JsDoc client:idle name="Pattern.euclidLegato" h={0} />
+
+## rev
+
+<JsDoc client:idle name="Pattern.rev" h={0} />
+
+## palindrome
+
+<JsDoc client:idle name="palindrome" h={0} />
+
+## iter
+
+<JsDoc client:idle name="Pattern.iter" h={0} />
+
+### iterBack
+
+<JsDoc client:idle name="Pattern.iterBack" h={0} />
+
+## ply
+
+<JsDoc client:idle name="ply" h={0} />
+
+## segment
+
+<JsDoc client:idle name="segment" h={0} />
+
+## compress
+
+<JsDoc client:idle name="compress" h={0} />
+
+## zoom
+
+<JsDoc client:idle name="zoom" h={0} />
+
+## linger
+
+<JsDoc client:idle name="linger" h={0} />
+
+## fastGap
+
+<JsDoc client:idle name="fastGap" h={0} />
+
+## inside
+
+<JsDoc client:idle name="inside" h={0} />
+
+## outside
+
+<JsDoc client:idle name="outside" h={0} />
+
+## cpm
+
+<JsDoc client:idle name="cpm" h={0} />
+
+## ribbon
+
+<JsDoc client:idle name="ribbon" h={0} />
+
+## swingBy
+
+<JsDoc client:idle name="swingBy" h={0} />
+
+## swing
+
+<JsDoc client:idle name="swing" h={0} />
+
+Apart from modifying time, there are ways to [Control Parameters](/functions/value-modifiers/).
+---
+title: Tonal Functions
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Tonal Functions
+
+These functions use [tonaljs](https://github.com/tonaljs/tonal) to provide helpers for musical operations.
+
+### voicing()
+
+<JsDoc client:idle name="voicing" h={0} />
+
+Here's an example of how you can play chords and a bassline:
+
+<MiniRepl
+  client:idle
+  tune={`chord("<C^7 A7b13 Dm7 G7>*2")
+  .dict('ireal').layer(
+  x=>x.struct("[~ x]*2").voicing()
+  ,
+  x=>n("0*4").set(x).mode("root:g2").voicing()
+  .s('sawtooth').cutoff("800:4:2")
+)`}
+/>
+
+### scale(name)
+
+<JsDoc client:idle name="scale" h={0} />
+
+### transpose(semitones)
+
+Transposes all notes to the given number of semitones:
+
+<MiniRepl client:only="react" tune={`"[c2 c3]*4".transpose("<0 -2 5 3>").note()`} />
+
+This method gets really exciting when we use it with a pattern as above.
+
+Instead of numbers, scientific interval notation can be used as well:
+
+<MiniRepl client:only="react" tune={`"[c2 c3]*4".transpose("<1P -2M 4P 3m>").note()`} />
+
+### scaleTranspose(steps)
+
+Transposes notes inside the scale by the number of steps:
+
+<MiniRepl
+  client:idle
+  tune={`"[-8 [2,4,6]]*2"
+.scale('C4 bebop major')
+.scaleTranspose("<0 -1 -2 -3 -4 -5 -6 -4>*2")
+.note()`}
+/>
+
+### rootNotes(octave = 2)
+
+Turns chord symbols into root notes of chords in given octave.
+
+<MiniRepl client:only="react" tune={`"<C^7 A7b13 Dm7 G7>*2".rootNotes(3).note()`} />
+
+Together with layer, struct and voicings, this can be used to create a basic backing track:
+
+<MiniRepl
+  client:idle
+  tune={`"<C^7 A7b13 Dm7 G7>*2".layer(
+  x => x.voicings('lefthand').struct("[~ x]*2").note(),
+  x => x.rootNotes(2).note().s('sawtooth').cutoff(800)
+)`}
+/>
+---
+title: Visual Feedback
+layout: ../../layouts/MainLayout.astro
+---
+
+import { MiniRepl } from '../../docs/MiniRepl';
+import { JsDoc } from '../../docs/JsDoc';
+
+# Visual Feedback
+
+There are several function that add visual feedback to your patterns.
+
+## Mini Notation Highlighting
+
+When you write mini notation with "double quotes" or \`backticks\`, the active parts of the mini notation will be highlighted:
+
+<MiniRepl
+  client:idle
+  tune={`n("<0 2 1 3 2>*8")
+.scale("<A1 D2>/4:minor:pentatonic")
+.s("supersaw").lpf(300).lpenv("<4 3 2>\*4")`}
+/>
+
+You can change the color as well, even pattern it:
+
+<MiniRepl
+  client:idle
+  tune={`n("<0 2 1 3 2>*8")
+.scale("<A1 D2>/4:minor:pentatonic")
+.s("supersaw").lpf(300).lpenv("<4 3 2>*4")
+.color("cyan magenta")`}
+/>
+
+## Global vs Inline Visuals
+
+The following functions all come with in 2 variants.
+
+**Without prefix**: renders the visual to the background of the page:
+
+<MiniRepl client:idle tune={`note("c a f e").color("white").punchcard()`} />
+
+**With `_` prefix**: renders the visual inside the code. Allows for multiple visuals
+
+<MiniRepl client:idle tune={`note("c a f e").color("white")._punchcard()`} />
+
+Here we see the 2 variants for `punchcard`. The same goes for all others below.
+To improve readability the following demos will all use the inline variant.
+
+## Punchcard / Pianoroll
+
+These 2 functions render a pianoroll style visual.
+The only difference between the 2 is that `pianoroll` will render the pattern directly,
+while `punchcard` will also take the transformations into account that occur afterwards:
+
+<MiniRepl
+  client:idle
+  tune={`note("c a f e").color("white")
+._punchcard()
+.color("cyan")`}
+  autodraw
+/>
+
+Here, the `color` is still visible in the visual, even if it is applied after `_punchcard`.
+On the contrary, the color is not visible when using `_pianoroll`:
+
+<MiniRepl
+  client:idle
+  tune={`note("c a f e").color("white")
+._pianoroll()
+.color("cyan")`}
+  autodraw
+/>
+
+import Box from '@components/Box.astro';
+
+<br />
+
+<Box>
+
+`punchcard` is less resource intensive because it uses the same data as used for the mini notation highlighting.
+
+</Box>
+
+The visual can be customized by passing options. Those options are the same for both functions.
+
+What follows is the API doc of all the options you can pass:
+
+<JsDoc client:idle name="pianoroll" h={0} />
+
+## Spiral
+
+<JsDoc client:idle name="spiral" h={0} />
+
+## Scope
+
+<JsDoc client:idle name="scope" h={0} />
+
+## Pitchwheel
+
+<JsDoc client:idle name="pitchwheel" h={0} />
+
+## Spectrum
+
+<JsDoc client:idle name="spectrum" h={0} />
+
+## markcss
+
+<JsDoc client:idle name="markcss" h={0} />
